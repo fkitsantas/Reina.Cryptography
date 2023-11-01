@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Weavers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FodyWeavers.xsd">
+	<Costura LoadAtModuleInit="true" Log="true">
+		<IncludeAssemblies>
+			Azure.Identity
+			Azure.Security.KeyVault.Keys
+			Azure.Security.KeyVault.Secrets
+			Azure.Core
+			Microsoft.Extensions.Configuration
+			Microsoft.Identity.Client
+			Microsoft.IdentityModel.Abstractions
+			System.Memory.Data
+			BouncyCastle.Cryptography
+		</IncludeAssemblies>
+	</Costura>
+</Weavers>

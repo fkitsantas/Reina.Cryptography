@@ -1,9 +1,43 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net481;net7.0</TargetFrameworks>
+		<LangVersion>latest</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net481|AnyCPU'">
+	  <WarningLevel>7</WarningLevel>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net481|AnyCPU'">
+	  <WarningLevel>7</WarningLevel>
+	</PropertyGroup>
+
+	<!-- FodyWeavers Configuration -->
+	<Target Name="CopyFodyWeaversConfig" BeforeTargets="BeforeBuild">
+		<Copy SourceFiles="FodyWeavers.$(TargetFramework).xml" DestinationFiles="$(IntermediateOutputPath)FodyWeavers.xml" />
+	</Target>
+
+	<Target Name="DeleteFodyWeaversConfig" AfterTargets="CoreBuild">
+		<Delete Files="$(ProjectDir)FodyWeavers.xml" />
+	</Target>
+
+	<!-- Common Package References -->
+	<ItemGroup>
+		<PackageReference Include="Azure.Core" Version="1.35.0" />
+		<PackageReference Include="Azure.Identity" Version="1.10.3" />
+		<PackageReference Include="Azure.Security.KeyVault.Keys" Version="4.5.0" />
+		<PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.5.0" />
+		<PackageReference Include="BouncyCastle.Cryptography" Version="2.2.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Identity.Client" Version="4.57.0" />
+		<PackageReference Include="Microsoft.IdentityModel.Abstractions" Version="7.0.3" />
+		<PackageReference Include="System.Memory.Data" Version="7.0.0" />
+		<PackageReference Include="Fody" Version="6.8.0" PrivateAssets="all" />
+		<PackageReference Include="Costura.Fody" Version="5.7.0" PrivateAssets="all" />
+	</ItemGroup>
 
 </Project>
