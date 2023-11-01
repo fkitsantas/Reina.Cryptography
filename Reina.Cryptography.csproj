@@ -6,14 +6,10 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net481|AnyCPU'">
-	  <WarningLevel>7</WarningLevel>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net481|AnyCPU'">
-	  <WarningLevel>7</WarningLevel>
+		<VersionPrefix>1.0.0</VersionPrefix>
+		<PackageProjectUrl>https://fkitsantas.github.io/Reina.Cryptography</PackageProjectUrl>
+		<RepositoryUrl>https://www.github.com/fkitsantas/Reina.Cryptography</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
 	</PropertyGroup>
 
 	<!-- FodyWeavers Configuration -->
