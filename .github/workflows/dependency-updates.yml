@@ -23,7 +23,8 @@ jobs:
 
       # Check for updates for .NET Framework 4.8.1
       - name: Check for updates for .NET Framework 4.8.1
-        run: dotnet list Reina.Cryptography.csproj package --outdated -p:TargetFramework=net481
+        run: dotnet list Reina.Cryptography.csproj package --outdated --framework net481
+
 
       # Install dependencies and build for .NET 7
       - name: Restore and build for .NET 7
@@ -33,7 +34,7 @@ jobs:
 
       # Check for updates for .NET 7
       - name: Check for updates for .NET 7
-        run: dotnet list Reina.Cryptography.csproj package --outdated -p:TargetFramework=net7.0
+        run: dotnet list Reina.Cryptography.csproj package --outdated --framework net7.0
 
       # If there are updates, create a pull request with the changes
       - name: Create Pull Request for updates
