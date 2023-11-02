@@ -23,14 +23,9 @@ jobs:
 
       # Install .NET Framework 4.8.1
       - name: Install .NET Framework 4.8.1
-        run: |
-          $url = "https://go.microsoft.com/fwlink/?linkid=2203306"
-          $output = "dotnet-framework-installer.exe"
-          $arguments = "/q /norestart"
-
-          Invoke-WebRequest -Uri $url -OutFile $output
-          Start-Process -FilePath $output -ArgumentList $arguments -Wait
-        shell: powershell
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '481'
 
       # Install dependencies and build project for .NET Framework 4.8.1
       - name: Install dependencies and build for .NET Framework 4.8.1
