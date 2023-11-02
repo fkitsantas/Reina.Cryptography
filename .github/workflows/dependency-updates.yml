@@ -13,7 +13,7 @@ jobs:
     steps:
       # Checks-out repository
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@main
 
       # Sets up .NET Core for multiple target frameworks
       - name: Setup .NET for net481
