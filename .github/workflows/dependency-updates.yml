@@ -18,16 +18,16 @@ jobs:
       # Install dependencies, build and Check for updates on NET Framework 4.8.1
       - name: Install dependencies, build and Check for updates on NET Framework 4.8.1
         run: |
-          dotnet restore
-          dotnet build --no-restore --framework net481
-          dotnet list package --outdated --framework net481
+          dotnet restore Reina.Cryptography.csproj --framework net481
+          dotnet build Reina.Cryptography.csproj --no-restore --framework net481
+          dotnet list Reina.Cryptography.csproj package --outdated --framework net481
 
       # Install dependencies, build and Check for updates on .NET 7
       - name: Install dependencies, build and Check for updates on .NET 7
         run: |
-          dotnet restore
-          dotnet build --no-restore --framework net7.0
-          dotnet list package --outdated --framework net7.0
+          dotnet restore Reina.Cryptography.csproj --framework net7.0
+          dotnet build Reina.Cryptography.csproj --no-restore --framework net7.0
+          dotnet list Reina.Cryptography.csproj package --outdated --framework net7.0
 
       # If there are updates, create a pull request with the changes
       - name: Create Pull Request for updates
