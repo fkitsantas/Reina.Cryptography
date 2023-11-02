@@ -17,12 +17,12 @@ jobs:
 
       # Sets up .NET Core for multiple target frameworks
       - name: Setup .NET for net481
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '4.8.1'
 
       - name: Setup .NET for net7.0
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '7.0.13'
 
