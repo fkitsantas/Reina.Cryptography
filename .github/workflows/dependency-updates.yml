@@ -1,0 +1,54 @@
+name: Check Dependencies
+
+on:
+  schedule:
+    # This will run every day at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  check-dependencies:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out repository
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      # Sets up .NET Core for multiple target frameworks
+      - name: Setup .NET for net481
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '4.8.1'
+
+      - name: Setup .NET for net7.0
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '7.0.13'
+
+      # Install dependencies and build project for all target frameworks
+      - name: Install dependencies and build
+        run: |
+          dotnet restore
+          dotnet build --no-restore
+
+      # Check for updates for all target frameworks
+      - name: Check for updates
+        run: |
+          dotnet list package --outdated --framework net481
+          dotnet list package --outdated --framework net7.0
+
+      # If there are updates, create a pull request with the changes
+      - name: Create Pull Request for updates
+        id: create_pull_request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: Update dependencies
+          title: 'Dependencies Update'
+          body: 'This pull request updates the following dependencies'
+          branch: 'dependencies-update'
+          delete-branch: true
+
+      # Output the URL of the created pull request if any
+      - name: Check output
+        run: echo "Pull Request URL - ${{ steps.create_pull_request.outputs.pull-request-url }}"
