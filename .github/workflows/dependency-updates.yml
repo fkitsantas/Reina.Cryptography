@@ -11,35 +11,46 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      # Checks-out repository
+      # Checks-out the repository
       - name: Check out code
         uses: actions/checkout@v3
 
-      # Sets up .NET Core for net7.0
-      - name: Setup .NET for net7.0
-        uses: actions/setup-dotnet@v2
+      # Sets up .NET SDK for .NET 7.0
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '7.0.x'
+          dotnet-version: '7.0.13'
 
-      # Install dependencies and build project for net7.0
-      - name: Install dependencies and build for net7.0
+      # Install .NET Framework 4.8.1
+      - name: Install .NET Framework 4.8.1
         run: |
-          dotnet restore --framework net7.0
+          $url = "https://go.microsoft.com/fwlink/?linkid=2203306"
+          $output = "dotnet-framework-installer.exe"
+          $arguments = "/q /norestart"
+
+          Invoke-WebRequest -Uri $url -OutFile $output
+          Start-Process -FilePath $output -ArgumentList $arguments -Wait
+        shell: powershell
+
+      # Install dependencies and build project for .NET Framework 4.8.1
+      - name: Install dependencies and build for .NET Framework 4.8.1
+        run: |
+          dotnet restore
+          dotnet build --no-restore --framework net481
+
+      # Check for updates for .NET Framework 4.8.1
+      - name: Check for updates for .NET Framework 4.8.1
+        run: dotnet list package --outdated --framework net481
+
+      # Install dependencies and build project for .NET 7.0
+      - name: Install dependencies and build for .NET 7.0
+        run: |
+          dotnet restore
           dotnet build --no-restore --framework net7.0
 
-      # Check for updates for net7.0
-      - name: Check for updates for net7.0
+      # Check for updates for .NET 7.0
+      - name: Check for updates for .NET 7.0
         run: dotnet list package --outdated --framework net7.0
-
-      # Install dependencies and build project for .NET Framework
-      - name: Install dependencies and build for .NET Framework
-        run: |
-          dotnet restore --framework net48
-          dotnet build --no-restore --framework net48
-
-      # Check for updates for .NET Framework
-      - name: Check for updates for .NET Framework
-        run: dotnet list package --outdated --framework net48
 
       # If there are updates, create a pull request with the changes
       - name: Create Pull Request for updates
