@@ -14,32 +14,20 @@ jobs:
       # Checks-out the repository
       - name: Check out code
         uses: actions/checkout@v3
-
-      # Sets up .NET SDK for .NET 7.0
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '7.0'
-
-      # Install dependencies and build project for .NET Framework 4.8.1
-      - name: Install dependencies and build for .NET Framework 4.8.1
+        
+      # Install dependencies, build and Check for updates on NET Framework 4.8.1
+      - name: Install dependencies, build and Check for updates on NET Framework 4.8.1
         run: |
           dotnet restore
           dotnet build --no-restore --framework net481
+          dotnet list package --outdated --framework net481
 
-      # Check for updates for .NET Framework 4.8.1
-      - name: Check for updates for .NET Framework 4.8.1
-        run: dotnet list package --outdated --framework net481
-
-      # Install dependencies and build project for .NET 7.0
-      - name: Install dependencies and build for .NET 7.0
+      # Install dependencies, build and Check for updates on .NET 7
+      - name: Install dependencies, build and Check for updates on .NET 7
         run: |
           dotnet restore
           dotnet build --no-restore --framework net7.0
-
-      # Check for updates for .NET 7.0
-      - name: Check for updates for .NET 7.0
-        run: dotnet list package --outdated --framework net7.0
+          dotnet list package --outdated --framework net7.0
 
       # If there are updates, create a pull request with the changes
       - name: Create Pull Request for updates
