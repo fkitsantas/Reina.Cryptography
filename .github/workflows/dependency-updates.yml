@@ -15,19 +15,25 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
         
-      # Install dependencies, build and Check for updates on NET Framework 4.8.1
-      - name: Install dependencies, build and Check for updates on NET Framework 4.8.1
+      # Install dependencies and build for .NET Framework 4.8.1
+      - name: Restore and build for .NET Framework 4.8.1
         run: |
-          dotnet restore Reina.Cryptography.csproj --framework net481
-          dotnet build Reina.Cryptography.csproj --no-restore --framework net481
-          dotnet list Reina.Cryptography.csproj package --outdated --framework net481
+          dotnet restore Reina.Cryptography.csproj -r win-x86
+          dotnet build Reina.Cryptography.csproj --no-restore -p:TargetFramework=net481
 
-      # Install dependencies, build and Check for updates on .NET 7
-      - name: Install dependencies, build and Check for updates on .NET 7
+      # Check for updates for .NET Framework 4.8.1
+      - name: Check for updates for .NET Framework 4.8.1
+        run: dotnet list Reina.Cryptography.csproj package --outdated -p:TargetFramework=net481
+
+      # Install dependencies and build for .NET 7
+      - name: Restore and build for .NET 7
         run: |
-          dotnet restore Reina.Cryptography.csproj --framework net7.0
-          dotnet build Reina.Cryptography.csproj --no-restore --framework net7.0
-          dotnet list Reina.Cryptography.csproj package --outdated --framework net7.0
+          dotnet restore Reina.Cryptography.csproj -r win-x86
+          dotnet build Reina.Cryptography.csproj --no-restore -p:TargetFramework=net7.0
+
+      # Check for updates for .NET 7
+      - name: Check for updates for .NET 7
+        run: dotnet list Reina.Cryptography.csproj package --outdated -p:TargetFramework=net7.0
 
       # If there are updates, create a pull request with the changes
       - name: Create Pull Request for updates
