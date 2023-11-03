@@ -1,0 +1,52 @@
+name: Check Dependencies
+
+on:
+  schedule:
+    # This will run every day at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  check-dependencies:
+    runs-on: windows-latest
+
+    steps:
+      # Checks-out the repository
+      - name: Check out code
+        uses: actions/checkout@v3
+        
+      # Install dependencies and build for .NET Framework 4.8.1
+      - name: Restore and build for .NET Framework 4.8.1
+        run: |
+          dotnet restore Reina.Cryptography.csproj -r win-x86
+          dotnet build Reina.Cryptography.csproj --no-restore -p:TargetFramework=net481
+
+      # Check for updates for .NET Framework 4.8.1
+      - name: Check for updates for .NET Framework 4.8.1
+        run: dotnet list Reina.Cryptography.csproj package --outdated --framework net481
+
+
+      # Install dependencies and build for .NET 7
+      - name: Restore and build for .NET 7
+        run: |
+          dotnet restore Reina.Cryptography.csproj -r win-x86
+          dotnet build Reina.Cryptography.csproj --no-restore -p:TargetFramework=net7.0
+
+      # Check for updates for .NET 7
+      - name: Check for updates for .NET 7
+        run: dotnet list Reina.Cryptography.csproj package --outdated --framework net7.0
+
+      # If there are updates, create a pull request with the changes
+      - name: Create Pull Request for updates
+        id: create_pull_request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: Update dependencies
+          title: 'Dependencies Update'
+          body: 'This pull request updates the following dependencies'
+          branch: 'dependencies-update'
+          delete-branch: true
+
+      # Output the URL of the created pull request if any
+      - name: Check output
+        run: echo "Pull Request URL - ${{ steps.create_pull_request.outputs.pull-request-url }}"
