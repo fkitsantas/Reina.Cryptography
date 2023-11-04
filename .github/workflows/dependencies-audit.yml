@@ -1,4 +1,4 @@
-name: Check dependencies for outdated packages
+name: Dependencies Audit
 
 on:
   schedule:
