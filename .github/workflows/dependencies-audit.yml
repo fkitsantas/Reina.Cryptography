@@ -1,4 +1,4 @@
-name: Check Dependencies
+name: Check dependencies for outdated packages
 
 on:
   schedule:
