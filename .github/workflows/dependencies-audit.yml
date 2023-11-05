@@ -1,4 +1,4 @@
-name: Check Dependencies
+name: Dependencies Audit
 
 on:
   schedule:
