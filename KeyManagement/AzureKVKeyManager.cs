@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 namespace Reina.Cryptography.KeyManagement
 {
     /// <summary>
-    /// Manages 256bit cryptographic keys by interfacing with Azure Key Vault.
+    /// Manages 256-bit cryptographic keys by interfacing with Azure Key Vault, providing secure storage and retrieval of keys.
+    /// This class implements a caching mechanism to optimize key retrieval performance by reducing the number of round trips to the key vault.
     /// </summary>
     internal class AzureKVKeyManager : IKeyManager
     {
@@ -52,6 +53,8 @@ namespace Reina.Cryptography.KeyManagement
         /// </summary>
         /// <param name="keyName">The name of the key to retrieve.</param>
         /// <returns>A byte array containing the encryption key.</returns>
+        /// <exception cref="UnauthorizedAccessException">Thrown when authentication or authorization with Azure Key Vault fails.</exception>
+        /// <exception cref="Exception">Thrown when an unexpected error occurs during key retrieval or generation.</exception>
         public async Task<byte[]> GetEncryptionKeyAsync(string keyName)
         {
             // Attempt to retrieve the key from cache.

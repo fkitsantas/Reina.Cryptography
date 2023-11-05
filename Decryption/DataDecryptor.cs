@@ -12,33 +12,48 @@ using Org.BouncyCastle.Security;
 namespace Reina.Cryptography.Decryption
 {
     /// <summary>
-    /// Implements decryption operations using cascading Triple-layered technique.
+    /// Implements decryption operations using a cascading triple-layered technique with Twofish, Serpent, and AES algorithms.
+    /// This class provides a high level of security by decrypting data in multiple stages.
     /// </summary>
     internal class DataDecryptor : IDecryptor
     {
-        /// <summary>
-        /// The 256bit cryptographic key used for decryption operations.
-        /// </summary>
-        private readonly byte[] _key;
+        private readonly byte[] _twofishKey;
+        private readonly byte[] _serpentKey;
+        private readonly byte[] _aesKey;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DataDecryptor"/> class with the specified decryption key.
+        /// Initializes a new instance of the <see cref="DataDecryptor"/> class with the specified keys for Twofish, Serpent, and AES.
         /// </summary>
-        /// <param name="key">The decryption key as a byte array.</param>
-        /// <exception cref="ArgumentNullException">Thrown when the key is null.</exception>
-        /// <exception cref="ArgumentException">Thrown when the key is not 256 bits in length.</exception>
-        public DataDecryptor(byte[] key)
+        /// <param name="twofishKey">The 256-bit Twofish key for decryption.</param>
+        /// <param name="serpentKey">The 256-bit Serpent key for decryption.</param>
+        /// <param name="aesKey">The 256-bit AES key for decryption.</param>
+        /// <exception cref="ArgumentNullException">Thrown when any key is null.</exception>
+        /// <exception cref="ArgumentException">Thrown when any key is not 256 bits in length.</exception>
+        public DataDecryptor(byte[] twofishKey, byte[] serpentKey, byte[] aesKey)
         {
-            if (key == null)
-                throw new ArgumentNullException(nameof(key), "Key cannot be null.");
-            if (key.Length != 32)
-                throw new ArgumentException("Invalid key size. Expected a 256-bit key.", nameof(key));
+            _twofishKey = twofishKey ?? throw new ArgumentNullException(nameof(twofishKey), "Twofish key cannot be null.");
+            _serpentKey = serpentKey ?? throw new ArgumentNullException(nameof(serpentKey), "Serpent key cannot be null.");
+            _aesKey = aesKey ?? throw new ArgumentNullException(nameof(aesKey), "AES key cannot be null.");
 
-            _key = key;
+            ValidateKey(_twofishKey, nameof(twofishKey));
+            ValidateKey(_serpentKey, nameof(serpentKey));
+            ValidateKey(_aesKey, nameof(aesKey));
         }
 
         /// <summary>
-        /// Decrypts the specified encrypted data using a layered approach.
+        /// Validates the length of the provided cryptographic key.
+        /// </summary>
+        /// <param name="key">The cryptographic key to validate.</param>
+        /// <param name="whichKey">The name of the key for error messaging purposes.</param>
+        /// <exception cref="ArgumentException">Thrown when the key is not 256 bits in length.</exception>
+        private void ValidateKey(byte[] key, string whichKey)
+        {
+            if (key.Length != 32)
+                throw new ArgumentException("Invalid key size. Expected a 256-bit key.", whichKey);
+        }
+
+        /// <summary>
+        /// Decrypts the specified encrypted data using a layered approach with AES, Serpent, and Twofish algorithms.
         /// </summary>
         /// <param name="encryptedBytes">The encrypted data to decrypt.</param>
         /// <returns>The decrypted data as a byte array.</returns>
@@ -50,9 +65,10 @@ namespace Reina.Cryptography.Decryption
             if (encryptedBytes == null)
                 throw new ArgumentNullException(nameof(encryptedBytes), "Encrypted data cannot be null.");
 
+            // Attempt to decrypt the data in a try-catch block to handle potential cryptographic exceptions.
             try
             {
-                // Layered decryption: first AES, then Serpent, and finally Twofish.
+                // Perform decryption in reverse order of encryption: first AES, then Serpent, and finally Twofish.
                 byte[] aesDecrypted = DecryptWithAES(encryptedBytes);
                 byte[] serpentDecrypted = DecryptWithSerpent(aesDecrypted);
                 byte[] twofishDecrypted = DecryptWithTwofish(serpentDecrypted);
@@ -61,19 +77,17 @@ namespace Reina.Cryptography.Decryption
             }
             catch (CryptographicException ce)
             {
-                if (ce.Message.Contains("Padding is invalid"))
-                {
-                    throw new CryptographicException("Decryption failed: The provided key or IV may be incorrect, or the encrypted data may have been tampered with or corrupted.", ce);
-                }
-                throw new CryptographicException("Decryption failed: A cryptographic error occurred. Please verify the encrypted data, key, and IV.", ce);
+                // Provide more context to the cryptographic exception for better error diagnosis.
+                throw new CryptographicException("Decryption failed: " + ce.Message, ce);
             }
             catch (ArgumentException ae)
             {
-                throw new ArgumentException("Decryption failed: The encrypted data provided is invalid or corrupted.", ae);
+                // Re-throw the argument exception with additional context.
+                throw new ArgumentException("Decryption failed: " + ae.Message, ae);
             }
             catch (Exception ex)
             {
-                // General exception handling as a fallback.
+                // General exception handling as a fallback to catch any other unexpected errors.
                 throw new Exception("Decryption failed: An unexpected error occurred.", ex);
             }
         }
@@ -96,7 +110,7 @@ namespace Reina.Cryptography.Decryption
                 var ivAes = new byte[ivLengthAes];
                 Array.Copy(encryptedBytes, ivAes, ivLengthAes);
 
-                aes.Key = _key;
+                aes.Key = _aesKey;
                 aes.IV = ivAes;
 
                 // Decrypt the remaining encrypted data after the IV.
@@ -127,7 +141,7 @@ namespace Reina.Cryptography.Decryption
             Array.Copy(encryptedBytes, ivSerpent, ivLengthSerpent);
 
             var serpentCipher = new PaddedBufferedBlockCipher(new CbcBlockCipher(serpentEngine), new Pkcs7Padding());
-            var serpentKeyParam = new KeyParameter(_key);
+            var serpentKeyParam = new KeyParameter(_serpentKey);
             var serpentKeyWithIv = new ParametersWithIV(serpentKeyParam, ivSerpent);
             serpentCipher.Init(false, serpentKeyWithIv);
 
@@ -157,7 +171,7 @@ namespace Reina.Cryptography.Decryption
             Array.Copy(encryptedBytes, ivTwofish, ivLengthTwofish);
 
             var twofishCipher = new PaddedBufferedBlockCipher(new CbcBlockCipher(twofishEngine), new Pkcs7Padding());
-            var keyParam = new KeyParameter(_key);
+            var keyParam = new KeyParameter(_twofishKey);
             var keyWithIv = new ParametersWithIV(keyParam, ivTwofish);
             twofishCipher.Init(false, keyWithIv);
 
