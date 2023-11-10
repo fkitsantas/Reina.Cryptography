@@ -11,7 +11,7 @@ namespace Reina.Cryptography
     /// Provides core functionality for encryption and decryption of data,
     /// interfacing with Azure Key Vault for key management.
     /// </summary>
-    public static class Core
+    public static class Library
     {
         /// <summary>
         /// Encrypts a plaintext string using three distinct keys for Twofish, Serpent, and AES encryption algorithms.
