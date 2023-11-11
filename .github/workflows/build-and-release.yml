@@ -28,7 +28,7 @@ jobs:
       # List build output for debugging purposes
       - name: List build output
         run: |
-          dir .\Reina.Cryptography\bin\Release\
+          dir .\bin\Release\
 
       # Create a release
       - name: Create Release
@@ -38,7 +38,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: "latest"
           prerelease: false
-          title: "Development Build"
+          title: "Latest Build"
 
       # Upload .dll for .NET Framework 4.8.1 as an asset to the release
       - name: Upload .NET Framework 4.8.1 DLL
