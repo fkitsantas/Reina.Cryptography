@@ -1,0 +1,16 @@
+digraph "Reina.Cryptography.Library.ValidateInput"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="Reina.Cryptography.Library.\lValidateInput",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Validates the input string and key names, ensuring they are not null or empty and adhere to the expec..."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="Reina.Cryptography.Library.\lDecrypt",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_reina_1_1_cryptography_1_1_library.html#a98ecb713792622e2faac792d3f31015c",tooltip="Decrypts a Base64-encoded string using three distinct keys for Twofish, Serpent, and AES encryption a..."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="Reina.Cryptography.Library.\lDecrypt",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_reina_1_1_cryptography_1_1_library.html#a08e8d9a9e8589565087dac21f0a0fbb8",tooltip="Decrypts a Base64-encoded string synchronously using a specified key retrieved asynchronously from Az..."];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 [label="Reina.Cryptography.Library.\lEncrypt",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_reina_1_1_cryptography_1_1_library.html#ab51581b077aa84ccfcfd9b753dd897e6",tooltip="Encrypts a plaintext string using three distinct keys for Twofish, Serpent, and AES encryption algori..."];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 [label="Reina.Cryptography.Library.\lEncrypt",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_reina_1_1_cryptography_1_1_library.html#a2dadbd8156744b46de813015772c5b8b",tooltip="Encrypts a plaintext string synchronously using a specified key retrieved asynchronously from Azure K..."];
+}

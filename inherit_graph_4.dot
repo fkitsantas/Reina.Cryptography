@@ -1,0 +1,8 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node0 [label="Reina.Cryptography.Library",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_reina_1_1_cryptography_1_1_library.html",tooltip="Provides core functionality for encryption and decryption of data, interfacing with Azure Key Vault f..."];
+}

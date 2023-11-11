@@ -1,0 +1,10 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node0 [label="Reina.Cryptography.Interfaces.\lIDecryptor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_reina_1_1_cryptography_1_1_interfaces_1_1_i_decryptor.html",tooltip="Defines the contract for the DataDecryptor class that implements data decryption."];
+  Node0 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node1 [label="Reina.Cryptography.Decryption.\lDataDecryptor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_reina_1_1_cryptography_1_1_decryption_1_1_data_decryptor.html",tooltip="Implements decryption operations using a cascading triple-layered technique with Twofish,..."];
+}

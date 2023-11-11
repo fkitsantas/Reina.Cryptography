@@ -1,0 +1,9 @@
+digraph "Reina.Cryptography.Configuration.Config"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="Reina.Cryptography.Configuration.\lConfig",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Represents the configuration settings for accessing Azure Key Vault. This class follows the Singleton..."];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="IConfiguration",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_reina_1_1_cryptography_1_1_interfaces_1_1_i_configuration.html",tooltip=" "];
+}

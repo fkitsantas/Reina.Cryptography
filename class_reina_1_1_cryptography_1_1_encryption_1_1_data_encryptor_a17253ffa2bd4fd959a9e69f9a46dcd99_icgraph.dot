@@ -1,0 +1,10 @@
+digraph "Reina.Cryptography.Encryption.DataEncryptor.EncryptWithTwofish"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="Reina.Cryptography.Encryption.\lDataEncryptor.EncryptWithTwofish",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Encrypts the data using the Twofish algorithm in CBC mode with PKCS7 padding."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="Reina.Cryptography.Encryption.\lDataEncryptor.Encrypt",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_reina_1_1_cryptography_1_1_encryption_1_1_data_encryptor.html#aa879e943041efe4eb31a461aef88e3fd",tooltip="Encrypts the specified plaintext data using a layered approach with Twofish, Serpent,..."];
+}

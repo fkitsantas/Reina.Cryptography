@@ -1,0 +1,10 @@
+digraph "Reina.Cryptography.Decryption.DataDecryptor.DecryptWithTwofish"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Reina.Cryptography.Decryption.\lDataDecryptor.DecryptWithTwofish",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Decrypts the data using the Twofish algorithm in CBC mode with PKCS7 padding."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="Reina.Cryptography.Decryption.\lDataDecryptor.ProcessCipher",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_reina_1_1_cryptography_1_1_decryption_1_1_data_decryptor.html#a7f059ba94892fac39942837709d811a9",tooltip="Processes the cipher operation (decryption) on the given input data."];
+}
