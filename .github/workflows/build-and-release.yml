@@ -47,7 +47,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Reina.Cryptography/bin/Release/Reina.Cryptography.net481.dll
+          asset_path: ./bin/Release/net481/Reina.Cryptography.net481.dll
           asset_name: Reina.Cryptography.net481.dll
           asset_content_type: application/octet-stream
 
@@ -58,6 +58,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Reina.Cryptography/bin/Release/Reina.Cryptography.net7.0.dll
+          asset_path: ./bin/Release/net7.0/Reina.Cryptography.net7.0.dll
           asset_name: Reina.Cryptography.net7.0.dll
           asset_content_type: application/octet-stream
