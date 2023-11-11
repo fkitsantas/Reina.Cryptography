@@ -10,6 +10,9 @@ on:
 jobs:
   build-and-release:
     runs-on: windows-latest
+    permissions:
+      contents: write
+      packages: write
 
     steps:
       # Checks-out the repository
