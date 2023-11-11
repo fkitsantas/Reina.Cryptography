@@ -5,9 +5,9 @@ on:
     branches:
       - main
     paths-ignore:
-      - ".github/workflows/"
-      - "Resources/"
-      - "README.md"
+      - '.github/workflows/**'
+      - 'Resources/**'
+      - 'README.md'
 
 jobs:
   build-and-release:
