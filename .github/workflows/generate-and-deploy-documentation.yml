@@ -1,0 +1,38 @@
+name: Generate and Deploy Documentation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Configuration/**'
+      - 'Encryption/**'
+      - 'Decryption/**'
+      - 'KeyManagement/**'
+      - 'Interfaces/**'
+      - 'Library.cs'
+      - 'Doxyfile'
+
+jobs:
+  build-and-deploy-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks out the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Sets up Doxygen
+      - name: Install Doxygen
+        run: sudo apt-get install doxygen
+
+      # Generates Documentation
+      - name: Generate Documentation
+        run: doxygen Doxyfile
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/
