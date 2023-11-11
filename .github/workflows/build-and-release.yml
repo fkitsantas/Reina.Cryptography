@@ -6,6 +6,7 @@ on:
       - main
     paths-ignore:
       - "README.md"
+      - "Resources/"
 
 jobs:
   build-and-release:
@@ -18,6 +19,45 @@ jobs:
       # Checks-out the repository
       - name: Check out code
         uses: actions/checkout@v3
+
+      # Calculate version number
+      - name: Calculate version
+        id: version
+        run: |
+          # Fetch current version from csproj
+          [xml]$csproj = Get-Content "Reina.Cryptography.csproj"
+          $currentVersion = $csproj.Project.PropertyGroup.Version
+          $versionParts = $currentVersion.Split('.')
+          $major = [int]$versionParts[0]
+          $minor = [int]$versionParts[1]
+          $build = [int]$versionParts[2]
+
+          # Calculate new version
+          $commitCount = git rev-list --count HEAD
+          $build = ($build + $commitCount) % 10
+          if ($build -eq 0 -and $commitCount -ne 0) {
+            $minor += 1
+            if ($minor -eq 10) {
+              $major += 1
+              $minor = 0
+            }
+          }
+          $newVersion = "$major.$minor.$build"
+          echo "New version: $newVersion"
+          echo "::set-output name=version::$newVersion"
+
+      # Update .csproj file
+      - name: Update project version
+        run: |
+          $csprojPath = "Reina.Cryptography.csproj"
+          [xml]$csproj = Get-Content $csprojPath
+          $csproj.Project.PropertyGroup.Version = "${{ steps.version.outputs.version }}"
+          $csproj.Save($csprojPath)
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add $csprojPath
+          git commit -m "Update version to ${{ steps.version.outputs.version }}"
+          git push
 
       # Install dependencies and build for both target frameworks
       - name: Build Project for .NET Framework 4.8.1 and .NET 7
@@ -36,9 +76,9 @@ jobs:
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: "latest"
+          automatic_release_tag: ${{ steps.version.outputs.version }}
           prerelease: false
-          title: "Latest Build"
+          title: "Latest Build v${{ steps.version.outputs.version }}"
 
       # Upload .dll for .NET Framework 4.8.1 as an asset to the release
       - name: Upload .NET Framework 4.8.1 DLL
