@@ -4,14 +4,10 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'Configuration/**'
-      - 'Encryption/**'
-      - 'Decryption/**'
-      - 'KeyManagement/**'
-      - 'Interfaces/**'
-      - 'Library.cs'
-      - 'Doxyfile'
+    paths-ignore:
+      - ".github/workflows/"
+      - "Resources/"
+      - "README.md"
 
 jobs:
   build-and-deploy-docs:
