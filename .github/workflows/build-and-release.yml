@@ -25,6 +25,11 @@ jobs:
           dotnet restore Reina.Cryptography.csproj
           dotnet build Reina.Cryptography.csproj --configuration Release
 
+      # List build output for debugging purposes
+      - name: List build output
+        run: |
+          dir .\Reina.Cryptography\bin\Release\
+
       # Create a release
       - name: Create Release
         id: create_release
