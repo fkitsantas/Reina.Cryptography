@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  check-dependencies:
+  dependencies-audit:
     runs-on: windows-latest
 
     steps:
