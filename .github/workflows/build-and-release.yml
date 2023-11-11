@@ -16,27 +16,6 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
 
-      # Conditional version increment and .csproj update
-      - name: Increment Version
-        if: "!contains(github.event.head_commit.message, 'skip ci')"
-        run: |
-          # Logic to increment version in .csproj file
-          # Example: Increment patch version
-          # Update this script based on your versioning strategy
-          $csprojFile = "Reina.Cryptography.csproj"
-          [xml]$csproj = Get-Content $csprojFile
-          $versionPrefix = $csproj.Project.PropertyGroup.VersionPrefix
-          $versionParts = $versionPrefix.Split('.')
-          $versionParts[2] = [int]$versionParts[2] + 1
-          $newVersionPrefix = $versionParts -join '.'
-          $csproj.Project.PropertyGroup.VersionPrefix = $newVersionPrefix
-          $csproj.Save($csprojFile)
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add $csprojFile
-          git commit -m "Bump version to $newVersionPrefix"
-          git push
-
       # Install dependencies and build for both target frameworks
       - name: Build Project for .NET Framework 4.8.1 and .NET 7
         run: |
