@@ -12,15 +12,6 @@
 		<RepositoryType>git</RepositoryType>
 	</PropertyGroup>
 
-	<!-- FodyWeavers Configuration -->
-	<Target Name="CopyFodyWeaversConfig" BeforeTargets="BeforeBuild">
-		<Copy SourceFiles="FodyWeavers.$(TargetFramework).xml" DestinationFiles="$(IntermediateOutputPath)FodyWeavers.xml" />
-	</Target>
-
-	<Target Name="DeleteFodyWeaversConfig" AfterTargets="CoreBuild">
-		<Delete Files="$(ProjectDir)FodyWeavers.xml" />
-	</Target>
-
 	<!-- Common Package References -->
 	<ItemGroup>
 		<PackageReference Include="Azure.Core" Version="1.35.0" />
@@ -36,4 +27,20 @@
 		<PackageReference Include="Costura.Fody" Version="5.7.0" PrivateAssets="all" />
 	</ItemGroup>
 
+	<!-- FodyWeavers Configuration -->
+	<Target Name="CopyFodyWeaversConfig" BeforeTargets="BeforeBuild">
+		<Copy SourceFiles="FodyWeavers.$(TargetFramework).xml" DestinationFiles="$(IntermediateOutputPath)FodyWeavers.xml" />
+	</Target>
+
+	<Target Name="DeleteFodyWeaversConfig" AfterTargets="CoreBuild">
+		<Delete Files="$(ProjectDir)FodyWeavers.xml" />
+	</Target>
+
+	<!-- Add a suffix to the output assembly based on the target framework -->
+	<Target Name="AddFrameworkSuffixToOutput" AfterTargets="Build">
+		<Move
+			SourceFiles="$(OutputPath)$(AssemblyName).dll"
+			DestinationFiles="$(OutputPath)$(AssemblyName).$(TargetFramework).dll"
+			Condition="Exists('$(OutputPath)$(AssemblyName).dll')" />
+	</Target>
 </Project>
