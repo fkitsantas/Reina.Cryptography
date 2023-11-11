@@ -1,0 +1,55 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+
+    steps:
+      # Checks-out the repository
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      # Install dependencies and build for both target frameworks
+      - name: Build Project for .NET Framework 4.8.1 and .NET 7
+        run: |
+          dotnet restore Reina.Cryptography.csproj
+          dotnet build Reina.Cryptography.csproj --configuration Release
+
+      # Create a release
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+          draft: false
+          prerelease: false
+
+      # Upload .dll for .NET Framework 4.8.1 as an asset to the release
+      - name: Upload .NET Framework 4.8.1 DLL
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./Reina.Cryptography/bin/Release/net481/Reina.Cryptography.dll  # Update this path
+          asset_name: Reina.Cryptography.net481.dll
+          asset_content_type: application/octet-stream
+
+      # Upload .dll for .NET 7 as an asset to the release
+      - name: Upload .NET 7 DLL
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./Reina.Cryptography/bin/Release/net7.0/Reina.Cryptography.dll  # Update this path
+          asset_name: Reina.Cryptography.net7.0.dll
+          asset_content_type: application/octet-stream
