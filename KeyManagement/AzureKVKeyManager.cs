@@ -21,6 +21,7 @@ namespace Reina.Cryptography.KeyManagement
         // Lazy initialization of the AzureKVKeyManager singleton instance.
         private static readonly Lazy<AzureKVKeyManager> _instance = new(() =>
         {
+            Config.Instance.ValidateConfiguration(); // Validate Azure KV Configuration
             return new AzureKVKeyManager(
                 Config.Instance.AzureKeyVaultUrl,
                 Config.Instance.AzureClientId,

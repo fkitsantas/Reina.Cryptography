@@ -24,6 +24,7 @@
 
         /// <summary>
         /// Validates the configuration settings to ensure they are correctly set.
+        /// This method should throw an exception if the configuration is invalid.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown when any of the configuration values are invalid or not set.</exception>
         void ValidateConfiguration();

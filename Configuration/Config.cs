@@ -27,22 +27,38 @@ namespace Reina.Cryptography.Configuration
         /// <summary>
         /// The URL of the Azure Key Vault.
         /// </summary>
-        public string AzureKeyVaultUrl { get; } = "the-azure-key-vault-url";
+        public string AzureKeyVaultUrl { get; private set; } = "the-azure-key-vault-url";
 
         /// <summary>
         /// The client ID for Azure Key Vault authentication.
         /// </summary>
-        public string AzureClientId { get; } = "the-client-id";
+        public string AzureClientId { get; private set; } = "the-client-id";
 
         /// <summary>
         /// The client secret for Azure Key Vault authentication.
         /// </summary>
-        public string AzureClientSecret { get; } = "the-azure-client-secret";
+        public string AzureClientSecret { get; private set; } = "the-azure-client-secret";
 
         /// <summary>
         /// The tenant ID for Azure Key Vault authentication.
         /// </summary>
-        public string AzureTenantId { get; } = "the-azure-tenant-id";
+        public string AzureTenantId { get; private set; } = "the-azure-tenant-id";
+
+        /// <summary>
+        /// Allows external configuration values to be set for the Azure Key Vault properties.
+        /// If a provided value is null or whitespace, the existing value is retained.
+        /// </summary>
+        /// <param name="azureKeyVaultUrl">The Azure Key Vault URL to set.</param>
+        /// <param name="azureClientId">The client ID for Azure Key Vault authentication to set.</param>
+        /// <param name="azureClientSecret">The client secret for Azure Key Vault authentication to set.</param>
+        /// <param name="azureTenantId">The tenant ID for Azure Key Vault authentication to set.</param>
+        public void SetConfiguration(string azureKeyVaultUrl, string azureClientId, string azureClientSecret, string azureTenantId)
+        {
+            AzureKeyVaultUrl = string.IsNullOrWhiteSpace(azureKeyVaultUrl) ? AzureKeyVaultUrl : azureKeyVaultUrl;
+            AzureClientId = string.IsNullOrWhiteSpace(azureClientId) ? AzureClientId : azureClientId;
+            AzureClientSecret = string.IsNullOrWhiteSpace(azureClientSecret) ? AzureClientSecret : azureClientSecret;
+            AzureTenantId = string.IsNullOrWhiteSpace(azureTenantId) ? AzureTenantId : azureTenantId;
+        }
 
         /// <summary>
         /// Validates the configuration settings for Azure Key Vault access.

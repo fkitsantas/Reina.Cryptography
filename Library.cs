@@ -1,5 +1,6 @@
 ﻿using Reina.Cryptography.Encryption;
 using Reina.Cryptography.Decryption;
+using Reina.Cryptography.Configuration;
 using Reina.Cryptography.KeyManagement;
 using System;
 using System.Text;
@@ -13,6 +14,19 @@ namespace Reina.Cryptography
     /// </summary>
     public static class Library
     {
+        /// <summary>
+        /// Configures the library with custom Azure Key Vault settings.
+        /// If this method is not called, default configuration values are used.
+        /// </summary>
+        /// <param name="azureKeyVaultUrl">Azure Key Vault URL.</param>
+        /// <param name="azureClientId">Azure client ID for authentication.</param>
+        /// <param name="azureClientSecret">Azure client secret for authentication.</param>
+        /// <param name="azureTenantId">Azure tenant ID for authentication.</param>
+        public static void Configuration(string azureKeyVaultUrl, string azureClientId, string azureClientSecret, string azureTenantId)
+        {
+            Config.Instance.SetConfiguration(azureKeyVaultUrl, azureClientId, azureClientSecret, azureTenantId);
+        }
+
         /// <summary>
         /// Encrypts a plaintext string using three distinct keys for Twofish, Serpent, and AES encryption algorithms.
         /// </summary>
@@ -42,6 +56,20 @@ namespace Reina.Cryptography
 
             // Return the encrypted data as a Base64 encoded string.
             return Convert.ToBase64String(encryptedBytes);
+        }
+
+        /// <summary>
+        /// Encrypts a plaintext string synchronously using a specified key retrieved asynchronously from Azure Key Vault.
+        /// The encryption process is a multi-layered approach that ensures data confidentiality.
+        /// </summary>
+        /// <param name="decryptedString">The plaintext string to be encrypted.</param>
+        /// <param name="keyName">The name of the key to use for encryption.</param>
+        /// <returns>A Base64-encoded string that represents the encrypted data.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the input string or key name is null or empty.</exception>
+        /// <exception cref="ArgumentException">Thrown if the key name does not adhere to the expected format.</exception>
+        public static string Encrypt(string decryptedString, string keyName)
+        {
+            return Encrypt(decryptedString, keyName, keyName, keyName);
         }
 
         /// <summary>
@@ -76,6 +104,20 @@ namespace Reina.Cryptography
         }
 
         /// <summary>
+        /// Decrypts a Base64-encoded string synchronously using a specified key retrieved asynchronously from Azure Key Vault.
+        /// The decryption process reverses the multi-layered encryption to restore the original plaintext.
+        /// </summary>
+        /// <param name="encryptedString">The Base64-encoded string to be decrypted.</param>
+        /// <param name="keyName">The name of the key to use for decryption.</param>
+        /// <returns>The decrypted plaintext string.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the encrypted string or key name is null or empty.</exception>
+        /// <exception cref="ArgumentException">Thrown if the key name does not adhere to the expected format.</exception>
+        public static string Decrypt(string encryptedString, string keyName)
+        {
+            return Decrypt(encryptedString, keyName, keyName, keyName);
+        }
+
+        /// <summary>
         /// Validates the input string and key names, ensuring they are not null or empty and adhere to the expected format.
         /// </summary>
         /// <param name="input">The input string to validate.</param>
@@ -97,35 +139,6 @@ namespace Reina.Cryptography
                 if (!System.Text.RegularExpressions.Regex.IsMatch(keyName, @"^[a-zA-Z][a-zA-Z0-9\-]{0,126}$"))
                     throw new ArgumentException("Invalid key name. A key name can be 1-127 characters, starting with a letter, containing only 0-9, a-z, A-Z, and -", nameof(keyName));
             }
-        }
-
-
-        /// <summary>
-        /// Encrypts a plaintext string synchronously using a specified key retrieved asynchronously from Azure Key Vault.
-        /// The encryption process is a multi-layered approach that ensures data confidentiality.
-        /// </summary>
-        /// <param name="decryptedString">The plaintext string to be encrypted.</param>
-        /// <param name="keyName">The name of the key to use for encryption.</param>
-        /// <returns>A Base64-encoded string that represents the encrypted data.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if the input string or key name is null or empty.</exception>
-        /// <exception cref="ArgumentException">Thrown if the key name does not adhere to the expected format.</exception>
-        public static string Encrypt(string decryptedString, string keyName)
-        {
-            return Encrypt(decryptedString, keyName, keyName, keyName);
-        }
-
-        /// <summary>
-        /// Decrypts a Base64-encoded string synchronously using a specified key retrieved asynchronously from Azure Key Vault.
-        /// The decryption process reverses the multi-layered encryption to restore the original plaintext.
-        /// </summary>
-        /// <param name="encryptedString">The Base64-encoded string to be decrypted.</param>
-        /// <param name="keyName">The name of the key to use for decryption.</param>
-        /// <returns>The decrypted plaintext string.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if the encrypted string or key name is null or empty.</exception>
-        /// <exception cref="ArgumentException">Thrown if the key name does not adhere to the expected format.</exception>
-        public static string Decrypt(string encryptedString, string keyName)
-        {
-            return Decrypt(encryptedString, keyName, keyName, keyName);
-        }
+        }        
     }
 }
