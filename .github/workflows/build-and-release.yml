@@ -58,7 +58,6 @@ jobs:
           echo "New version: $newVersion"
           echo "::set-output name=version::$newVersion"
 
-
       # Update .csproj file
       - name: Update project version
         run: |
@@ -80,7 +79,6 @@ jobs:
           git commit -m "Update version to ${{ steps.version.outputs.version }}"
           git push
 
-
       # Install dependencies and build for both target frameworks
       - name: Build Project for .NET Framework 4.8.1 and .NET 7
         run: |
@@ -92,6 +90,13 @@ jobs:
         run: |
           dir .\bin\Release\
 
+      # Get the last commit message
+      - name: Get the last commit message
+        id: commit_message
+        run: |
+          $commitMessage = git log -1 --pretty=%B
+          echo "::set-output name=message::$commitMessage"
+      
       # Create a release
       - name: Create Release
         id: create_release
@@ -101,6 +106,7 @@ jobs:
           automatic_release_tag: ${{ steps.version.outputs.version }}
           prerelease: false
           title: "Latest Build v${{ steps.version.outputs.version }}"
+          body: ${{ steps.commit_message.outputs.message }}
 
       # Upload .dll for .NET Framework 4.8.1 as an asset to the release
       - name: Upload .NET Framework 4.8.1 DLL
