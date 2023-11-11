@@ -24,9 +24,20 @@ jobs:
       - name: Calculate version
         id: version
         run: |
-          # Fetch current version from csproj
+          # Ensure csproj file exists
+          if (!(Test-Path "Reina.Cryptography.csproj")) {
+            Write-Error "Reina.Cryptography.csproj file not found"
+            exit 1
+          }
+
+          # Fetch current version prefix from csproj
           [xml]$csproj = Get-Content "Reina.Cryptography.csproj"
-          $currentVersion = $csproj.Project.PropertyGroup.Version
+          $currentVersion = $csproj.Project.PropertyGroup.VersionPrefix
+          if ([string]::IsNullOrEmpty($currentVersion)) {
+            Write-Error "VersionPrefix not found in Reina.Cryptography.csproj"
+            exit 1
+          }
+
           $versionParts = $currentVersion.Split('.')
           $major = [int]$versionParts[0]
           $minor = [int]$versionParts[1]
@@ -45,6 +56,7 @@ jobs:
           $newVersion = "$major.$minor.$build"
           echo "New version: $newVersion"
           echo "::set-output name=version::$newVersion"
+
 
       # Update .csproj file
       - name: Update project version
