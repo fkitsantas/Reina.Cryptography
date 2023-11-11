@@ -21,6 +21,13 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
 
+      # Get the last commit message
+      - name: Get the last commit message
+        id: commit_message
+        run: |
+          $commitMessage = git log -1 --pretty=%B
+          echo "::set-output name=message::$commitMessage"
+
       # Calculate version number
       - name: Calculate version
         id: version
@@ -89,13 +96,6 @@ jobs:
       - name: List build output
         run: |
           dir .\bin\Release\
-
-      # Get the last commit message
-      - name: Get the last commit message
-        id: commit_message
-        run: |
-          $commitMessage = git log -1 --pretty=%B
-          echo "::set-output name=message::$commitMessage"
       
       # Create a release
       - name: Create Release
