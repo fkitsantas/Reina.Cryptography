@@ -1,6 +1,6 @@
 ![Reina Cryptography Library](/Resources/Reina-Cryptography-Preview.jpg)
 ## Project Overview
-Reina Cryptography is a state-of-the-art class library for .NET and .NET Framework, meticulously designed to offer advanced Cascading Triple-Layered Encryption and Decryption capabilities, along with internal key management functionalities. Focusing on security and ease of use, the library provides seamless integration with Azure Key Vault. During encryption or decryption processes, this integration automatically fetches the 256-bit encryption key(s) stored under the keyname(s) specified by the developer for Encryption/Decryption. If such key(s) do not exist, the library creates new unique 256-bit encryption key(s) and stores them under the specified keyname(s) on Azure Key Vault for future use.
+Reina Cryptography is a state-of-the-art class library for .NET and .NET Framework, meticulously designed to provide advanced Cascading Triple-Layered Encryption and Decryption capabilities, along with internal key management. Focusing on security and ease of use, the library provides seamless integration with Azure Key Vault. During encryption or decryption processes, this integration automatically fetches the 256-bit encryption key(s) stored under the keyname(s) specified by the developer for Encryption/Decryption. If such key(s) do not exist, the library creates new unique 256-bit encryption key(s) and stores them under the specified keyname(s) on Azure Key Vault for future use.
 
 ## Table of Contents
 
