@@ -4,12 +4,11 @@ on:
   push:
     branches:
       - main
-  pull_request:
     paths-ignore:
-      - ".github/workflows/"
-      - "Resources/"
-      - "README.md"
-
+      - '.github/workflows/**'
+      - 'Resources/**'
+      - 'README.md'
+      
 jobs:
   build-and-deploy-docs:
     runs-on: ubuntu-latest
