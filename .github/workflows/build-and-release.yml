@@ -63,13 +63,22 @@ jobs:
         run: |
           $csprojPath = "Reina.Cryptography.csproj"
           [xml]$csproj = Get-Content $csprojPath
-          $csproj.Project.PropertyGroup.Version = "${{ steps.version.outputs.version }}"
+
+          # Check if VersionPrefix exists and update it
+          if ($csproj.Project.PropertyGroup.VersionPrefix) {
+              $csproj.Project.PropertyGroup.VersionPrefix = "${{ steps.version.outputs.version }}"
+          } else {
+              Write-Error "<VersionPrefix> not found in $csprojPath"
+              exit 1
+          }
+
           $csproj.Save($csprojPath)
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add $csprojPath
           git commit -m "Update version to ${{ steps.version.outputs.version }}"
           git push
+
 
       # Install dependencies and build for both target frameworks
       - name: Build Project for .NET Framework 4.8.1 and .NET 7
