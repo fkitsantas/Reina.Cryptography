@@ -1,15 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net481;net7.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <VersionPrefix>3.0.2</VersionPrefix>
+    <VersionPrefix>3.0.1</VersionPrefix>
     <PackageProjectUrl>https://fkitsantas.github.io/Reina.Cryptography</PackageProjectUrl>
     <RepositoryUrl>https://www.github.com/fkitsantas/Reina.Cryptography</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
+	
   <!-- Common Package References -->
   <ItemGroup>
     <PackageReference Include="Azure.Core" Version="1.36.0" />
@@ -24,13 +25,7 @@
     <PackageReference Include="Fody" Version="6.8.0" PrivateAssets="all" />
     <PackageReference Include="Costura.Fody" Version="5.7.0" PrivateAssets="all" />
   </ItemGroup>
-  <!-- FodyWeavers Configuration -->
-  <Target Name="CopyFodyWeaversConfig" BeforeTargets="BeforeBuild">
-    <Copy SourceFiles="FodyWeavers.$(TargetFramework).xml" DestinationFiles="$(IntermediateOutputPath)FodyWeavers.xml" />
-  </Target>
-  <Target Name="DeleteFodyWeaversConfig" AfterTargets="CoreBuild">
-    <Delete Files="$(ProjectDir)FodyWeavers.xml" />
-  </Target>
+
   <!-- Add a suffix to the output assembly based on the target framework -->
   <Target Name="AddFrameworkSuffixToOutput" AfterTargets="Build">
     <Move SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFiles="$(OutputPath)$(AssemblyName).$(TargetFramework).dll" Condition="Exists('$(OutputPath)$(AssemblyName).dll')" />
