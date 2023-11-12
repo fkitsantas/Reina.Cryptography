@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <VersionPrefix>3.0.6</VersionPrefix>
+    <VersionPrefix>3.0.2</VersionPrefix>
     <PackageProjectUrl>https://fkitsantas.github.io/Reina.Cryptography</PackageProjectUrl>
     <RepositoryUrl>https://www.github.com/fkitsantas/Reina.Cryptography</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
