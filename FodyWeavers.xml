@@ -13,6 +13,7 @@
 			System.Memory.Data
 			System.Memory
 			System.Diagnostics.DiagnosticSource
+			System.Text.Json
 			BouncyCastle.Cryptography
 		</IncludeAssemblies>
 	</Costura>
