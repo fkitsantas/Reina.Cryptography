@@ -1,46 +1,168 @@
 ![Reina Cryptography Library](/Resources/Reina-Cryptography-Preview.jpg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/) &nbsp; [![Dependencies Audit](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/dependencies-audit.yml/badge.svg)](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/dependencies-audit.yml) &nbsp; [![Build and Release](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/build-and-release.yml/badge.svg)](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/build-and-release.yml) &nbsp; [![Generate and Deploy Documentation](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/generate-and-deploy-documentation.yml/badge.svg)](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/generate-and-deploy-documentation.yml)
 
-
-
 ## Project Overview
 Reina Cryptography is a state-of-the-art class library for .NET and .NET Framework, meticulously designed to provide advanced Cascading Triple-Layered Encryption and Decryption capabilities, along with internal key management. Focusing on security and ease of use, the library provides seamless integration with Azure Key Vault. During encryption or decryption processes, this integration automatically fetches the 256-bit encryption key(s) stored under the keyname(s) specified by the developer for Encryption/Decryption. If such key(s) do not exist, the library creates new unique 256-bit encryption key(s) and stores them under the specified keyname(s) on Azure Key Vault for future use.
 
 ## Table of Contents
 
-1. **Introduction**
-   - Core Features and Capabilities
-   - Target Audience and Application Scenarios
+1. [**Introduction**](#introduction)
+   - [Core Features and Capabilities](#core-features-and-capabilities)
+   - [Target Audience and Application Scenarios](#target-audience-and-application-scenarios)
 
-2. **System Requirements and Dependencies**
-   - Software Requirements
-   - External Dependencies and Integration Points
+2. [**System Requirements and Dependencies**](#system-requirements-and-dependencies)
+   - [Software Requirements](#software-requirements)
+   - [External Dependencies and Integration Points](#external-dependencies-and-integration-points)
 
-3. **Installation Guide**
-   - Step-by-Step Installation Process
-   - Configuration and Setup
+3. [**Detailed Usage Guide**](#detailed-usage-guide)
+   - [Functionality Overview](#functionality-overview)
+     - [Encryption Process Explained](#encryption-process-explained)
+     - [Decryption Process Explained](#decryption-process-explained)
+   - [Integration with Azure Key Vault](#integration-with-azure-key-vault)
+      - [Configuration - Azure Key Vault Credentials](#configuration---azure-key-vault-credentials)
+   - [API Reference](#api-reference)
+     - [`Configuration` Method: Detailed Description and Parameters](#configuration-method-detailed-description-and-parameters)
+     - [`Encrypt` Method: Detailed Description and Parameters](#encrypt-method-detailed-description-and-parameters)
+     - [`Decrypt` Method: Detailed Description and Parameters](#decrypt-method-detailed-description-and-parameters)
+   - [Code Samples and Best Practices](#code-samples-and-best-practices)
 
-4. **Detailed Usage Guide**
-   - Functionality Overview
-     - Encryption Process Explained
-     - Decryption Process Explained
-   - API Reference
-     - `Encrypt` Method: Detailed Description and Parameters
-     - `Decrypt` Method: Detailed Description and Parameters
-   - Code Samples and Best Practices
+4. [**Project Design**](#project-design)
+   - [Architecture Overview](#architecture-overview)
+   - [Library Structure](#library-structure)
+   - [Streamlined CI/CD with GitHub Actions](#streamlined-cicd-with-github-actions)
+      - [Dependencies Audit](#dependencies-audit)
+      - [Build and Release](#build-and-release)
+      - [Generate and Deploy Documentation](#generate-and-deploy-documentation)
 
-5. **Integration with Azure Key Vault**
-   - Configuring Azure Key Vault
-   - Managing Encryption Keys
+5. [**Security Considerations**](#security-considerations)
+   - [Security Enhancement with a .NET Obfuscator](#security-enhancement-with-a-net-obfuscator)
 
-6. **Troubleshooting and Support**
-   - Common Issues and Resolutions
-   - Getting Help and Support Resources
+6. [**Troubleshooting and Support**](#troubleshooting-and-support)
+   - [Common Issues and Resolutions](#common-issues-and-resolutions)
+   - [Getting Help and Support Resources](#getting-help-and-support-resources)
 
-7. **Contributing to Reina.Cryptography**
-   - Contribution Guidelines
-   - Community and Development Process
+7. [**Contributing to Reina.Cryptography**](#contributing-to-reina-cryptography)
+   - [Contribution Guidelines](#contribution-guidelines)
+   - [Community and Development Process](#community-and-development-process)
 
-8. **License and Legal Information**
-   - Licensing Details
-   - Acknowledgments and Third-Party Licenses
+8. [**License and Legal Information**](#license-and-legal-information)
+   - [Licensing Details](#licensing-details)
+   - [Acknowledgments and Third-Party Licenses](#acknowledgments-and-third-party-licenses)
+
+---
+
+## Introduction
+
+### Core Features and Capabilities
+
+asdasda
+
+### Target Audience and Application Scenarios
+
+asdasda
+
+## System Requirements and Dependencies
+
+### Software Requirements
+
+asdasda
+
+### External Dependencies and Integration Points
+
+asdasda
+
+## Detailed Usage Guide
+
+### Functionality Overview
+
+#### Encryption Process Explained
+
+asdasda
+
+#### Decryption Process Explained
+
+asdasda
+
+### Integration with Azure Key Vault
+
+#### Configuration - Azure Key Vault Credentials
+
+asdasda
+
+### API Reference
+
+#### `Configuration` Method: Detailed Description and Parameters
+
+asdasda
+
+#### `Encrypt` Method: Detailed Description and Parameters
+
+asdasda
+
+#### `Decrypt` Method: Detailed Description and Parameters
+
+asdasda
+
+### Code Samples and Best Practices
+
+asdasda
+
+## Project Design
+
+### Architecture Overview
+
+asdasda
+
+### Library Structure
+
+asdasda
+
+### Streamlined CI/CD with GitHub Actions
+
+#### Dependencies Audit
+
+asdasda
+
+#### Build and Release
+
+asdasda
+
+#### Generate and Deploy Documentation
+
+asdasda
+
+## Security Considerations
+
+### Security Enhancement with a .NET Obfuscator
+
+asdasda
+
+## Troubleshooting and Support
+
+### Common Issues and Resolutions
+
+asdasda
+
+### Getting Help and Support Resources
+
+asdasda
+
+## Contributing to Reina.Cryptography
+
+### Contribution Guidelines
+
+asdasda
+
+### Community and Development Process
+
+asdasda
+
+## License and Legal Information
+
+### Licensing Details
+
+asdasda
+
+### Acknowledgments and Third-Party Licenses
+
+asdasda
