@@ -49,13 +49,11 @@ Reina Cryptography is a state-of-the-art class library for .NET and .NET Framewo
 ### Core Features and Capabilities
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 ### Target Audience and Application Scenarios
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 ## System Requirements and Dependencies
@@ -63,13 +61,11 @@ asdasda
 ### Software Requirements
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 ### External Dependencies and Integration Points
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 ## Detailed Usage Guide
@@ -79,13 +75,11 @@ asdasda
 #### Encryption Process Explained
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 #### Decryption Process Explained
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 ### Integration with Azure Key Vault
@@ -93,7 +87,6 @@ asdasda
 #### Configuration - Azure Key Vault Credentials
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 ### API Reference
@@ -101,25 +94,21 @@ asdasda
 #### `Configuration` Method: Detailed Description and Parameters
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 #### `Encrypt` Method: Detailed Description and Parameters
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 #### `Decrypt` Method: Detailed Description and Parameters
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 ### Code Samples and Best Practices
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 ## Project Design
@@ -127,13 +116,11 @@ asdasda
 ### Architecture Overview
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 ### Library Structure
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 ### Streamlined CI/CD with GitHub Actions
@@ -141,19 +128,16 @@ asdasda
 #### Dependencies Audit
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 #### Build and Release
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 #### Generate and Deploy Documentation
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 ## Security Considerations
@@ -161,7 +145,6 @@ asdasda
 ### Security Enhancement with a .NET Obfuscator
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 ## Troubleshooting and Support
@@ -169,13 +152,11 @@ asdasda
 ### Common Issues and Resolutions
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 ### Getting Help and Support Resources
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 ## Contributing to Reina.Cryptography
@@ -183,13 +164,11 @@ asdasda
 ### Contribution Guidelines
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 ### Community and Development Process
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 ## License and Legal Information
@@ -197,11 +176,9 @@ asdasda
 ### Licensing Details
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
 
 ### Acknowledgments and Third-Party Licenses
 
 asdasda
-
 <a href="#table-of-contents"><img align="right" src="Resources/backtotop.png" width="24" height="24"></a>
