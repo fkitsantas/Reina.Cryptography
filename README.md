@@ -39,7 +39,7 @@ Reina Cryptography is a state-of-the-art class library for .NET and .NET Framewo
 6. [**Troubleshooting and Support**](#troubleshooting-and-support)
    - [Common Issues and Resolutions](#common-issues-and-resolutions)
    - [Getting Help and Support Resources](#getting-help-and-support-resources)
-   - 
+     
 7. [**Contributing to Reina.Cryptography**](#contributing-to-reina-cryptography)
    - [Contribution Guidelines](#contribution-guidelines)
    - [Community and Development Process](#community-and-development-process)
