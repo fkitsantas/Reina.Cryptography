@@ -202,8 +202,8 @@ Reina.Cryptography, a top-notch Class Library for .NET & .NET Framework, dedicat
 ### Author
 
 **Fotios Kitsantas** ([fkitsantas@icloud.com](mailto:fkitsantas@icloud.com))  
-Senior Software Engineer
+Senior Software Engineer  
 📍 London, United Kingdom
 
-For inquiries or feedback, please contact via the provided email.
+For inquiries or feedback, please contact via the provided email.  
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
