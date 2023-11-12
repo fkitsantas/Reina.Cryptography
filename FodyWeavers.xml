@@ -16,6 +16,7 @@
 			System.Text.Json
 			System.Runtime.CompilerServices.Unsafe
 			System.Buffers
+			System.Numerics.Vectors
 			BouncyCastle.Cryptography
 		</IncludeAssemblies>
 	</Costura>
