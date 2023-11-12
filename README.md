@@ -197,7 +197,7 @@ asdasda
 
 *"I married a Software Engineer, who codes all day but hasn't created an app with my name"* said my wife, Reina, half-jokingly. So, here we are..
 
-Reina.Cryptography, a top-notch Class Library for .NET & .NET Framework, dedicated to my wonderful and amazing wife, Reina.
+Reina.Cryptography, a top-notch Class Library for .NET & .NET Framework, dedicated to my drop-dead gorgeous and out-of-this-world amazing wife, Reina.
 
 ### Author
 
