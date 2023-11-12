@@ -12,6 +12,7 @@
 			System.Threading.Tasks.Extensions
 			System.Memory.Data
 			System.Memory
+			System.Diagnostics.DiagnosticSource
 			BouncyCastle.Cryptography
 		</IncludeAssemblies>
 	</Costura>
