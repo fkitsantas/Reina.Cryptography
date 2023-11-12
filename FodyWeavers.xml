@@ -14,6 +14,7 @@
 			System.Memory
 			System.Diagnostics.DiagnosticSource
 			System.Text.Json
+			System.Runtime.CompilerServices.Unsafe
 			BouncyCastle.Cryptography
 		</IncludeAssemblies>
 	</Costura>
