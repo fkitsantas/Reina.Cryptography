@@ -195,7 +195,7 @@ asdasda
 
 <img align="left" src="Resources/Reina-Cryptography.png" width="300px" />
 
-"I married a Software Engineer, who codes all day but hasn't created an app with my name" said my wife, Reina, half-jokingly. So, here we are..
+*"I married a Software Engineer, who codes all day but hasn't created an app with my name"* said my wife, Reina, half-jokingly. So, here we are..
 
 Reina.Cryptography, a top-notch Class Library for .NET & .NET Framework, dedicated to my wonderful and amazing wife, Reina.
 
