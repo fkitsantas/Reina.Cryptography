@@ -27,7 +27,6 @@ Reina Cryptography is a state-of-the-art class library for .NET and .NET Framewo
    - [Code Samples and Best Practices](#code-samples-and-best-practices)
      
 4. [**Project Design**](#project-design)
-   
    - [Architecture Overview](#architecture-overview)
    - [Library Structure](#library-structure)
    - [Streamlined CI/CD with GitHub Actions](#streamlined-cicd-with-github-actions)
@@ -36,28 +35,22 @@ Reina Cryptography is a state-of-the-art class library for .NET and .NET Framewo
       - [Generate and Deploy Documentation](#generate-and-deploy-documentation)
         
 5. [**Security Considerations**](#security-considerations)
-    
    - [Security Enhancement with a .NET Obfuscator](#security-enhancement-with-a-net-obfuscator)
      
 6. [**Troubleshooting and Support**](#troubleshooting-and-support)
-    
    - [Common Issues and Resolutions](#common-issues-and-resolutions)
    - [Getting Help and Support Resources](#getting-help-and-support-resources)
    - 
 7. [**Contributing to Reina.Cryptography**](#contributing-to-reina-cryptography)
-
    - [Contribution Guidelines](#contribution-guidelines)
    - [Community and Development Process](#community-and-development-process)
      
 8. [**License and Legal Information**](#license-and-legal-information)
-    
    - [Licensing Details](#licensing-details)
    - [Acknowledgments and Third-Party Licenses](#acknowledgments-and-third-party-licenses)
 
-9. [**About Reina.Cryptography**](#about-reina-cryptography)
-    
+9. [**About Reina.Cryptography**](#about-reinacryptography)
    - [Author](#author)
-
 ---
 
 ## Introduction
