@@ -11,6 +11,7 @@
 			Microsoft.IdentityModel.Abstractions
 			System.Threading.Tasks.Extensions
 			System.Memory.Data
+			System.Memory
 			BouncyCastle.Cryptography
 		</IncludeAssemblies>
 	</Costura>
