@@ -8,7 +8,7 @@ Reina Cryptography is a state-of-the-art class library for .NET and .NET Framewo
 1. [**Introduction**](#introduction)
    - [Core Features and Capabilities](#core-features-and-capabilities)
    - [Target Audience and Application Scenarios](#target-audience-and-application-scenarios)
-2. [**System Requirements and Dependencies**](#system-requirements-and-dependencies)
+2. [**Requirements and Dependencies**](#system-requirements-and-dependencies)
    - [Software Requirements](#software-requirements)
    - [External Dependencies](#external-dependencies)
 3. [**Detailed Usage Guide**](#detailed-usage-guide)
@@ -87,7 +87,7 @@ Reina Cryptography is designed to cater to a diverse range of users and applicat
 In summary, Reina Cryptography is a versatile library that can be employed in various scenarios where data security is crucial. Its ease of integration with Azure Key Vault and its advanced encryption capabilities make it an ideal choice for a wide range of applications, from individual developer projects to large-scale enterprise solutions.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
-## System Requirements and Dependencies
+## Requirements and Dependencies
 
 ### Software Requirements
 
