@@ -46,9 +46,17 @@ Reina Cryptography is a state-of-the-art class library for .NET and .NET Framewo
 
 ## Introduction
 
+Reina Cryptography is designed to integrate effortlessly with Azure Key Vault, providing a robust and secure management system for 256-bit encryption keys, enabling developers to perform extremely complex encryption and decryption tasks with ease.
+
 ### Core Features and Capabilities
 
-asdasda
+ The core features that define the essence of this library:
+- **Seamless Azure Key Vault Integration**: The library integrates flawlessly with Azure Key Vault, ensuring secure and efficient management of 256-bit encryption keys. This integration guarantees that cryptographic keys are not only safeguarded but also readily available for encryption tasks. The developer doesn't have to worry about store/retrieve of these keys as the Library handles that during encryption and decryption automatically.
+- **Flexible Key Management Options**: The library provides the flexibility to generate and utilize distinct 256-bit keys for each encryption algorithm or to employ a single key across multiple algorithms. This flexibility allows developers to choose the level of granularity in key management that best suits their application's needs. By leveraging Azure Key Vault, Reina Cryptography ensures that these cryptographic keys will remain safe on the cloud for future use, instead of being hardcoded, thereby enhancing security and reducing the potential for key compromise.
+- **Triple-Layered Cascading Encryption Technique**: At the heart of Reina Cryptography is the Cascading Encryption Technique, which empowers developers to layer encryption through a sequence of Twofish, Serpent, and AES algorithms. This methodical layering is more than just a security feature; it's a commitment to data integrity and confidentiality. Even in the event of a breach in one encryption layer, the remaining layers maintain their defensive posture, safeguarding the encrypted data.
+- **Unique Initialization Vector (IV) for Each Operation**: Each encryption operation within the library is complemented by a securely generated, unique Initialization Vector (IV). These IVs are not merely appended but are intricately woven into the ciphertext, bolstering the encryption against pattern analysis and brute-force attacks. This strategic approach to encryption ensures that each piece of data remains an enigma, challenging even the most advanced decryption attempts.
+
+Building on these core features, Reina Cryptography offers a comprehensive solution for developers seeking a robust and versatile encryption toolkit.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ### Target Audience and Application Scenarios
