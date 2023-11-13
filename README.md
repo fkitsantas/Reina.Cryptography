@@ -26,7 +26,7 @@ Reina Cryptography is a state-of-the-art class library for .NET and .NET Framewo
    - [Architecture Overview](#architecture-overview)
    - [Library Structure](#library-structure)
    - [Streamlined CI/CD with GitHub Actions](#streamlined-cicd-with-github-actions)
-      - [Dependencies Audit](#dependencies-audit)
+      - [Dependabot](#dependabot)
       - [Build and Release](#build-and-release)
       - [Generate and Deploy Documentation](#generate-and-deploy-documentation)
 5. [**Security Considerations**](#security-considerations)
@@ -125,7 +125,7 @@ asdasda
 
 ### Streamlined CI/CD with GitHub Actions
 
-#### Dependencies Audit
+#### Dependabot
 
 asdasda
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
