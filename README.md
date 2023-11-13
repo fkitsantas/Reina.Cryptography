@@ -102,12 +102,12 @@ The library is designed for use with the .NET Framework and .NET platforms.
 
 Reina Cryptography integrates with external libraries to provide its advanced features. The following dependencies are used internally for the library's functionality:
 - **Azure SDK Packages**:
-  - `Azure.Core` (v1.36.0): Provides shared components for Azure client libraries.
-  - `Azure.Identity` (v1.10.3): Enables Azure Active Directory token authentication.
-  - `Azure.Security.KeyVault.Keys` (v4.5.0): Manages keys and related cryptographic operations in Azure Key Vault.
-  - `Azure.Security.KeyVault.Secrets` (v4.5.0): Handles secrets and secure storage in Azure Key Vault.
-- **BouncyCastle Cryptography (v2.2.1)**: A comprehensive cryptography library providing a range of encryption algorithms.
-- **Fody (v6.8.0)** and **Costura.Fody (v5.7.0)**: Used for embedding dependencies into the library assembly, ensuring a single, self-contained DLL.
+  - `Azure.Core`: Provides shared components for Azure client libraries.
+  - `Azure.Identity`: Enables Azure Active Directory token authentication.
+  - `Azure.Security.KeyVault.Keys`: Manages keys and related cryptographic operations in Azure Key Vault.
+  - `Azure.Security.KeyVault.Secrets`: Handles secrets and secure storage in Azure Key Vault.
+- **BouncyCastle Cryptography**: A comprehensive cryptography library providing a range of encryption algorithms.
+- **Fody** and **Costura.Fody**: Used for embedding dependencies into the library assembly, ensuring a single, self-contained DLL.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ## Detailed Usage Guide
