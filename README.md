@@ -66,14 +66,14 @@ Building on these core features, Reina Cryptography offers a comprehensive solut
 
 Reina Cryptography is designed to cater to a diverse range of users and application scenarios, making it a versatile tool in the realm of encryption and security.
 
-#### Target Audiences
+#### Target Audiences:
 - **Software Development Companies**: Ideal for companies looking to enhance the security of their applications, Reina Cryptography can be integrated into their development process. Companies can hardcode their Azure Key Vault credentials in the `Config.cs` file, obfuscate the produced .dll, and distribute it to their development teams. This approach allows developers to leverage the company's Azure Key Vault for encryption and decryption tasks without direct access to the sensitive credentials, ensuring a secure and centralized key management system.
 
 - **Individual Developers**: The library is also well-suited for individual developers working on .NET or .NET Framework applications who require robust encryption capabilities. Whether for personal projects or professional development, Reina Cryptography offers an easy way to integrate Azure Key Vault and implement advanced encryption techniques.
 
 - **Enterprise Security Solutions**: Enterprises seeking to bolster their data security can utilize Reina Cryptography to protect sensitive information. The library's advanced encryption methods are ideal for securing data in transit and at rest, making it a valuable tool for enterprise security strategies.
 
-#### Application Scenarios
+#### Application Scenarios:
 - **Cloud-Based Applications**: For applications deployed in cloud environments, Reina Cryptography provides an additional layer of security. Its integration with Azure Key Vault makes it particularly suitable for applications hosted on Azure, ensuring that encryption keys are managed securely in the cloud.
 
 - **Financial Technology (FinTech) Applications**: In the FinTech sector, where data security is paramount, Reina Cryptography can be used to secure financial transactions and sensitive customer data. Its robust encryption capabilities ensure that financial data remains confidential and secure.
