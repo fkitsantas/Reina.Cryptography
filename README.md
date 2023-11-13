@@ -8,11 +8,9 @@ Reina Cryptography is a state-of-the-art class library for .NET and .NET Framewo
 1. [**Introduction**](#introduction)
    - [Core Features and Capabilities](#core-features-and-capabilities)
    - [Target Audience and Application Scenarios](#target-audience-and-application-scenarios)
-     
 2. [**System Requirements and Dependencies**](#system-requirements-and-dependencies)
    - [Software Requirements](#software-requirements)
    - [External Dependencies and Integration Points](#external-dependencies-and-integration-points)
-     
 3. [**Detailed Usage Guide**](#detailed-usage-guide)
    - [Functionality Overview](#functionality-overview)
      - [Encryption Process Explained](#encryption-process-explained)
@@ -24,7 +22,6 @@ Reina Cryptography is a state-of-the-art class library for .NET and .NET Framewo
      - [`Encrypt` Method: Detailed Description and Parameters](#encrypt-method-detailed-description-and-parameters)
      - [`Decrypt` Method: Detailed Description and Parameters](#decrypt-method-detailed-description-and-parameters)
    - [Code Samples and Best Practices](#code-samples-and-best-practices)
-     
 4. [**Project Design**](#project-design)
    - [Architecture Overview](#architecture-overview)
    - [Library Structure](#library-structure)
@@ -32,22 +29,17 @@ Reina Cryptography is a state-of-the-art class library for .NET and .NET Framewo
       - [Dependencies Audit](#dependencies-audit)
       - [Build and Release](#build-and-release)
       - [Generate and Deploy Documentation](#generate-and-deploy-documentation)
-        
 5. [**Security Considerations**](#security-considerations)
    - [Security Enhancement with a .NET Obfuscator](#security-enhancement-with-a-net-obfuscator)
-     
 6. [**Troubleshooting and Support**](#troubleshooting-and-support)
    - [Common Issues and Resolutions](#common-issues-and-resolutions)
    - [Getting Help and Support Resources](#getting-help-and-support-resources)
-     
 7. [**Contributing to Reina.Cryptography**](#contributing-to-reina-cryptography)
    - [Contribution Guidelines](#contribution-guidelines)
    - [Community and Development Process](#community-and-development-process)
-     
 8. [**License and Legal Information**](#license-and-legal-information)
    - [Licensing Details](#licensing-details)
    - [Acknowledgments and Third-Party Licenses](#acknowledgments-and-third-party-licenses)
-
 9. [**About Reina.Cryptography**](#about-reinacryptography)
    - [Author](#author)
 ---
