@@ -361,7 +361,19 @@ For an added layer of security, especially when handling sensitive information l
 
 ### Common Issues and Resolutions
 
-asdasda
+While the library is designed with comprehensive error handling to provide clear and informative exception messages, common issues that could happen:
+
+#### 1. Invalid Azure Key Vault Credentials
+- **Issue:** Failure in encryption or decryption due to incorrect Azure credentials.
+- **Resolution:** Verify that the Azure Key Vault URL, Client ID, Client Secret, and Tenant ID are correctly set in the `Config.cs` file. If you're using manual configuration, ensure that the `Configuration` method is invoked with accurate parameters.
+
+#### 2. Missing or Incorrect Encryption/Decryption Keys
+- **Issue:** Exceptions thrown due to missing or incorrect key names provided for encryption or decryption.
+- **Resolution:** Check the key names provided in the `Encrypt` or `Decrypt` method calls. Ensure they match the keys stored in Azure Key Vault and that they are correctly passed to the methods.
+
+#### 3. Network or Connectivity Issues
+- **Issue:** Unable to connect to Azure Key Vault, possibly due to network issues.
+- **Resolution:** Verify network connectivity and ensure that the Azure Key Vault service is reachable. Check firewall and proxy settings if necessary.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ### Getting Help and Support Resources
