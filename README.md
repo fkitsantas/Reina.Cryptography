@@ -155,22 +155,37 @@ asdasdaasd
 
 ## Project Design
 
+Reina.Cryptography is engineered with a focus on modularity, scalability, maintainability, and robust security. The library's design employs a layered architecture, strategically crafted to achieve these objectives.
 ### Architecture Overview
 
-The key architectural components are as follows:
-1. **Interface Layer**: Defines the contract for each module, ensuring a clear separation of concerns and promoting a plug-and-play approach.
-2. **Implementation Layer**: Contains concrete implementations of the interfaces, providing the core functionalities of the library. This layer ensures that each module can be extended or replaced without affecting other parts of the system.
-3. **Integration with Azure Key Vault**: The key management module integrates with Azure Key Vault, ensuring that encryption keys are securely managed and stored.
-4. **Exception Handling**: Comprehensive exception handling ensures that any issues, whether related to configuration, encryption, or key management, are clearly communicated to the developer.
+The architecture is composed of several key components, each designed to fulfill specific roles within the library:
+
+1. **Interface Layer**: This layer serves as a contract for each module, promoting separation of concerns and enabling a flexible, plug-and-play methodology. It ensures that different components can interact seamlessly while maintaining clear boundaries.
+
+2. **Implementation Layer**: Here, concrete implementations of the defined interfaces are provided. This layer forms the backbone of the library, offering the primary functionalities. Its design allows for the extension or replacement of modules without impacting other system parts, exemplifying the principle of modularity.
+
+3. **Integration with Azure Key Vault**: A critical aspect of the library is its integration with Azure Key Vault for secure encryption key management. This integration is crucial for maintaining high security and reliability in cryptographic operations.
+
+4. **Exception Handling**: The library includes robust exception handling mechanisms. These are designed to provide clear and informative feedback on issues related to configuration, encryption, or key management, aiding developers in effective troubleshooting.
+
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ### Library Structure
 
-- **Configuration**: Contains the `Config` class which manages the configuration settings for accessing Azure Key Vault.
-- **Decryption**: Contains the `DataDecryptor` class responsible for decrypting data.
-- **Encryption**: Contains the `DataEncryptor` class responsible for encrypting data.
-- **Interfaces**: Defines the interfaces for configuration, encryption, decryption, and key management.
-- **Key Management**: Contains the `AzureKVKeyManager` class which integrates with Azure Key Vault for key management.
+- **Configuration Module**: This module, featuring the `Config` class, is responsible for managing the settings required for accessing Azure Key Vault. It ensures that the library can securely and efficiently interact with the key vault.
+
+- **Decryption Module**: The `DataDecryptor` class within this module handles all aspects of data decryption. It is designed to be both efficient
+
+and secure, ensuring that the decryption process is reliable and consistent.
+
+- **Encryption Module**: This module houses the `DataEncryptor` class, tasked with encrypting data. It implements advanced encryption techniques, ensuring data security and integrity.
+
+- **Interfaces Module**: This module defines the core interfaces for configuration, encryption, decryption, and key management. It lays the groundwork for the library's modular design, allowing for easy extension and customization.
+
+- **Key Management Module**: The `AzureKVKeyManager` class in this module is integral for managing encryption keys via Azure Key Vault. This module ensures that keys are stored, retrieved, and managed securely, leveraging Azure's robust infrastructure.
+
+Each module in Reina.Cryptography is designed to work independently yet cohesively, contributing to the library's overall effectiveness and efficiency. This structured approach not only simplifies maintenance and upgrades but also enhances the library's usability across various application scenarios.
+
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ### Streamlined CI/CD with GitHub Actions
