@@ -178,7 +178,7 @@ The `Config.cs` file, located in the Configuration folder, is handling the Azure
 - `AzureTenantId`: Tenant ID for Azure authentication.
 
 **Critical Notice:**
-- If the Azure Key Vault credentials are not hardcoded in the `Config.cs` file when you produce the Reina.Cryptography.dll, it is imperative for the developer who references the produced Reina.Cryptography.dll on his project to use the manual configuration option. This involves invoking the `Configuration` method within the library to explicitly set the Azure Key Vault credentials as required.
+- If the Azure Key Vault credentials are not hardcoded in the `Config.cs` file to be as default configuration values when you produce the Reina.Cryptography.dll, it is imperative for the developer who references the produced Reina.Cryptography.dll on his project to use the manual configuration option. This involves invoking the `Configuration` method within the library to explicitly set the Azure Key Vault credentials as required.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ### API Reference
