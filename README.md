@@ -192,7 +192,7 @@ The `Configuration` method is designed to configure the library with custom Azur
 
 #### `Encrypt` Method: Detailed Description and Parameters
 
-The `Encrypt` method in `Reina.Cryptography` library offers flexible encryption capabilities, allowing users to encrypt plaintext strings using either a single key or separate keys for each encryption algorithm. This method supports two overloads:
+The `Encrypt` method offers flexible encryption capabilities, allowing users to encrypt plaintext strings using either a single key or separate keys for each encryption algorithm. This method supports two overloads:
 
 1. **Three-Key Encryption:**
    - This overload is designed for enhanced security, employing three distinct cryptographic algorithms—Twofish, Serpent, and AES—each using a separate key.
@@ -222,7 +222,7 @@ Both overloads of the `Encrypt` method are designed to securely interface with A
 
 #### `Decrypt` Method: Detailed Description and Parameters
 
-The `Decrypt` method in `Reina.Cryptography` library is reverting the encryption process and retrieving the original plaintext from encrypted data. Like the `Encrypt` method, it supports two overloads for flexible decryption using either a single key or separate keys for each decryption algorithm.
+The `Decrypt` method reverts the encryption process and retrieves the original plaintext from encrypted data. Like the `Encrypt` method, it supports two overloads for flexible decryption using either a single key or separate keys for each decryption algorithm.
 
 1. **Three-Key Decryption:**
    - This overload is tailored for scenarios where data was encrypted using three distinct keys for Twofish, Serpent, and AES algorithms. It is essential for maintaining the integrity of the decryption process that the same keys used for encryption are applied here.
