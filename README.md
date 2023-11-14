@@ -169,17 +169,44 @@ asdasda
 
 #### Dependabot
 
-asdasda
+Reina Cryptography leverages GitHub's Dependabot to ensure all dependencies are up-to-date. Dependabot checks daily for updates in project dependencies and automatically creates pull requests to update the `PackageReference` versions in the project file. This proactive approach ensures that the library is always using the latest, most secure versions of its dependencies, reducing the risk of vulnerabilities.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 #### Build and Release
 
-asdasda
+The ["Build and Release" workflow](https://github.com/fkitsantas/Reina.Cryptography/blob/main/.github/workflows/build-and-release.yml) in GitHub Actions is a crucial part of Reina Cryptography's CI/CD pipeline. This workflow is triggered on every push to the main branch, excluding changes to workflow files, resources, and the README.md file. The steps involved in this workflow are:
+
+1. **Check out code**: The latest version of the codebase is checked out for building and releasing.
+
+2. **Get the last commit message**: This step captures the last commit message for use in the release notes.
+
+3. **Calculate version number**: The workflow calculates a new version number based on the number of commits. This ensures a unique version for each build, facilitating traceability and version management.
+
+4. **Update project version**: The calculated version number is then used to update the project file (`Reina.Cryptography.csproj`).
+
+5. **Build Project**: The project is built for both .NET Framework 4.8.1 and .NET 7, ensuring compatibility across different environments.
+
+6. **Create Release**: A new GitHub release is created with the calculated version number, including the last commit message as the release note.
+
+7. **Upload .dll files**: The built DLL files for both .NET Framework 4.8.1 and .NET 7 are uploaded as assets to the GitHub release, making them available for download.
+
+This workflow automates the process of building, versioning, and releasing the library, ensuring a consistent and reliable delivery process.
+
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 #### Generate and Deploy Documentation
 
-asdasda
+The ["Generate and Deploy Documentation" workflow](https://github.com/fkitsantas/Reina.Cryptography/blob/main/.github/workflows/generate-and-deploy-documentation.yml) is another integral part of the CI/CD pipeline. This workflow is responsible for automatically generating and deploying the project's documentation. The steps include:
+
+1. **Checkout Repository**: The latest version of the repository is checked out.
+
+2. **Install Doxygen**: Doxygen, a documentation generation tool, is installed on the runner.
+
+3. **Generate Documentation**: Doxygen reads the configured `Doxyfile` and generates documentation from the codebase.
+
+4. **Deploy to GitHub Pages**: The generated documentation is then deployed to GitHub Pages, making it accessible to users and contributors. This ensures that the project's documentation is always up-to-date with the latest code changes.
+
+This workflow simplifies the process of maintaining up-to-date and accessible documentation, which is crucial for both users and contributors to understand and effectively use the library.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ## Security Considerations
