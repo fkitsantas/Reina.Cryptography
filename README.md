@@ -173,7 +173,15 @@ Reina Cryptography integrates with external libraries to provide its advanced fe
 
 #### Configuration - Azure Key Vault Credentials
 
-asdasda
+The `Config.cs` file, residing within the Configuration folder, is pivotal for the management of Azure Key Vault credentials. This file contains variables that should be populated to facilitate seamless authentication:
+
+- `AzureKeyVaultUrl`: URL for the Azure Key Vault.
+- `AzureClientId`: Client ID for Azure authentication.
+- `AzureClientSecret`: Client secret for Azure authentication.
+- `AzureTenantId`: Tenant ID for Azure authentication.
+
+**Critical Notice:**
+- These variables are mandatory to be set. If the Azure Key Vault credentials are not hardcoded in the `Config.cs` file when you produce the Reina.Cryptography.dll, it is imperative for the developer who references this DLL on his project to use the manual configuration option. This involves invoking the `Configuration` method within the library to explicitly set the Azure Key Vault credentials as required.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ### API Reference
