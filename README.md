@@ -172,20 +172,19 @@ The architecture is composed of several key components, each designed to fulfill
 
 ### Library Structure
 
-- **Configuration Module**: This module, featuring the `Config` class, is responsible for managing the settings required for accessing Azure Key Vault. It ensures that the library can securely and efficiently interact with the key vault.
+The library is organized into the following modules:
 
-- **Decryption Module**: The `DataDecryptor` class within this module handles all aspects of data decryption. It is designed to be both efficient
+- **Configuration Module**: Contains the `Config` class, which manages the configuration settings for accessing Azure Key Vault.
 
-and secure, ensuring that the decryption process is reliable and consistent.
+- **Decryption Module**: Contains the `DataDecryptor` class, which is responsible for decrypting data.
 
-- **Encryption Module**: This module houses the `DataEncryptor` class, tasked with encrypting data. It implements advanced encryption techniques, ensuring data security and integrity.
+- **Encryption Module**: Contains the `DataEncryptor` class, which is responsible for encrypting data.
+  
+- **Interfaces Module**: Defines the interfaces for configuration, encryption, decryption, and key management.
 
-- **Interfaces Module**: This module defines the core interfaces for configuration, encryption, decryption, and key management. It lays the groundwork for the library's modular design, allowing for easy extension and customization.
-
-- **Key Management Module**: The `AzureKVKeyManager` class in this module is integral for managing encryption keys via Azure Key Vault. This module ensures that keys are stored, retrieved, and managed securely, leveraging Azure's robust infrastructure.
+- **Key Management Module**: Contains the `AzureKVKeyManager` class, which integrates with Azure Key Vault for key management.
 
 Each module in Reina.Cryptography is designed to work independently yet cohesively, contributing to the library's overall effectiveness and efficiency. This structured approach not only simplifies maintenance and upgrades but also enhances the library's usability across various application scenarios.
-
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ### Streamlined CI/CD with GitHub Actions
