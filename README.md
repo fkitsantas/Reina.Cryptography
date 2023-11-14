@@ -2,7 +2,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/) &nbsp; [![Build and Release](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/build-and-release.yml/badge.svg)](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/build-and-release.yml) &nbsp; [![Generate and Deploy Documentation](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/generate-and-deploy-documentation.yml/badge.svg)](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/generate-and-deploy-documentation.yml)
 
 ## Project Overview
-Reina Cryptography is a state-of-the-art class library for .NET and .NET Framework, expertly crafted to deliver advanced and highly secure Cascading Triple-Layered Encryption/Decryption. It features robust key management, integrating smoothly with Azure Key Vault for secure handling of 256-bit encryption keys and generating unique IVs for each encryption layer, each prepended to its respective cipher.
+Reina Cryptography is a state-of-the-art class library for .NET and .NET Framework, offering cascading triple-layered encryption/decryption (Twofish->Serpent->AES), with internal key management and unique IVs for each layer, each prepended to its respective cipher for enhanced data security. The library integrates with Azure Key Vault for seamless store/retrieve of the 256-bit encryption key(s).
 
 ## Table of Contents
 1. [**Introduction**](#introduction)
