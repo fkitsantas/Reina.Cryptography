@@ -116,12 +116,57 @@ Reina Cryptography integrates with external libraries to provide its advanced fe
 
 #### Encryption Process Explained
 
-asdasda
+1. **Calling the Encrypt Method:**
+   - The process starts when the `Encrypt` method in `Library.cs` is called. This method serves as the gateway to initiate the encryption process.
+
+2. **Key Retrieval Process:**
+   - The method interacts with `AzureKVKeyManager.cs` to retrieve the necessary encryption keys.
+   - Depending on user input, either a single key or three different keys are fetched. If one key name is provided, the same key is used across all encryption layers. If three key names are provided, each key is used for a specific algorithm – the first for Twofish, the second for Serpent, and the third for AES.
+
+3. **Encryption in Layers with Unique IVs:**
+   - The encryption is performed in three layers, each with a unique Initialization Vector (IV).
+   - **First Layer - Twofish:**
+     - A new IV is generated for the Twofish encryption.
+     - The data is encrypted using Twofish with its corresponding key and IV.
+     - The IV is then prepended to the Twofish encrypted data.
+   - **Second Layer - Serpent:**
+     - Another new IV is generated for the Serpent encryption.
+     - The Twofish encrypted data (including its IV) is encrypted using Serpent with its respective key and this new IV.
+     - This IV is then prepended to the Serpent encrypted data.
+   - **Third Layer - AES:**
+     - A final new IV is generated for the AES encryption.
+     - The Serpent encrypted data (with its IV) is encrypted using AES with its key and this new IV.
+     - This IV is then prepended to the AES encrypted data.
+
+4. **Output:**
+   - The final output is a securely encrypted data block, which consists of the AES encrypted data and its IV, containing within it the Serpent encrypted data and its IV, and within that, the Twofish encrypted data and its IV. This multi-layered approach with unique IVs for each layer ensures a high level of security.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 #### Decryption Process Explained
 
-asdasda
+1. **Calling the Decrypt Method:**
+   - The decryption process begins with the `Decrypt` method in `Library.cs`. This method is responsible for reversing the encryption process.
+
+2. **Key Retrieval Process:**
+   - Similar to encryption, the `Decrypt` method retrieves keys from `AzureKVKeyManager.cs`.
+   - If one key name was used for encryption, the same key is fetched for all decryption layers. If three different key names were used, each corresponding key is fetched for its specific decryption algorithm.
+
+3. **Layered Decryption with Unique IVs:**
+   - The decryption process mirrors the encryption layers, but in reverse order, each with its respective IV.
+   - **First Layer - AES:**
+     - The method extracts the IV prepended to the encrypted data.
+     - The data is decrypted using AES with its key and the extracted IV.
+     - The remaining data (still encrypted with Serpent) is separated from the AES IV.
+   - **Second Layer - Serpent:**
+     - The next IV (for Serpent) is extracted from the remaining data.
+     - The data is then decrypted using Serpent with its key and the extracted IV.
+     - The remaining data (still encrypted with Twofish) is separated from the Serpent IV.
+   - **Third Layer - Twofish:**
+     - The final IV (for Twofish) is extracted from the remaining data.
+     - The data is decrypted using Twofish with its key and the extracted IV, resulting in the original plaintext.
+
+4. **Output:**
+   - The output is the original unencrypted data, successfully decrypted and restored to its initial form.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ### Integration with Azure Key Vault
