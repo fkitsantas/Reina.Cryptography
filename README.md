@@ -16,7 +16,6 @@ Reina Cryptography is a state-of-the-art class library for .NET and .NET Framewo
       - [Encryption Process Explained](#encryption-process-explained)
       - [Decryption Process Explained](#decryption-process-explained)
    - 3.2 [Integration with Azure Key Vault](#integration-with-azure-key-vault)
-      - [Configuration - Azure Key Vault Credentials](#configuration---azure-key-vault-credentials)
    - 3.3 [API Reference](#api-reference)
       - [`Configuration` Method: Detailed Description and Parameters](#configuration-method-detailed-description-and-parameters)
       - [`Encrypt` Method: Detailed Description and Parameters](#encrypt-method-detailed-description-and-parameters)
@@ -171,9 +170,7 @@ Reina Cryptography integrates with external libraries to provide its advanced fe
 
 ### Integration with Azure Key Vault
 
-#### Configuration - Azure Key Vault Credentials
-
-The `Config.cs` file, residing within the Configuration folder, is pivotal for the management of Azure Key Vault credentials. This file contains variables that should be populated to facilitate seamless authentication:
+The `Config.cs` file, located in the Configuration folder, is handling the Azure Key Vault credentials. These variables need to be populated to ensure seamless authentication:
 
 - `AzureKeyVaultUrl`: URL for the Azure Key Vault.
 - `AzureClientId`: Client ID for Azure authentication.
@@ -181,7 +178,7 @@ The `Config.cs` file, residing within the Configuration folder, is pivotal for t
 - `AzureTenantId`: Tenant ID for Azure authentication.
 
 **Critical Notice:**
-- These variables are mandatory to be set. If the Azure Key Vault credentials are not hardcoded in the `Config.cs` file when you produce the Reina.Cryptography.dll, it is imperative for the developer who references this DLL on his project to use the manual configuration option. This involves invoking the `Configuration` method within the library to explicitly set the Azure Key Vault credentials as required.
+- If the Azure Key Vault credentials are not hardcoded in the `Config.cs` file when you produce the Reina.Cryptography.dll, it is imperative for the developer who references the produced Reina.Cryptography.dll on his project to use the manual configuration option. This involves invoking the `Configuration` method within the library to explicitly set the Azure Key Vault credentials as required.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ### API Reference
