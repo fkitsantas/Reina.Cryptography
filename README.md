@@ -257,10 +257,10 @@ Both overloads of the `Decrypt` method ensure secure interaction with Azure Key 
 
 #### Integration and Usage of Reina.Cryptography Library
 
-Integrating and using the `Reina.Cryptography` library in your projects is a straightforward process that enhances the security of your data through robust encryption and decryption functionalities. Here’s how you can seamlessly incorporate and utilize this library:
+Integrating and using the `Reina.Cryptography` library in your projects is a straightforward process. Here’s how you can seamlessly incorporate and utilize this library:
 
 ##### Referencing the Library
-Firstly, ensure that the `Reina.Cryptography.dll` is referenced in your project. This DLL contains all the necessary components for encryption and decryption operations.
+Firstly, ensure that the `Reina.Cryptography.dll` is referenced in your project.
 
 ##### Using the Library in Your Code
 After referencing the DLL, you can use the library's functionalities in any .cs file within your project. Follow these steps:
