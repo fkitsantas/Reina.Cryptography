@@ -167,7 +167,7 @@ asdasda
 
 ### Streamlined CI/CD with GitHub Actions
 
-Continuous Integration and Continuous Deployment (CI/CD) are fundamental practices in modern software development, aimed at enhancing code quality and streamlining the release process. Reina Cryptography project leverages GitHub Actions to automate the CI/CD pipeline. This automation ensures that every code push is built and tested automatically. Additionally, our documentation is dynamically generated and deployed, keeping our project documentation up-to-date with the latest changes. Below are the badges representing the status of our CI/CD pipelines:
+Continuous Integration and Continuous Deployment (CI/CD) are fundamental practices in modern software development, aimed at enhancing code quality and streamlining the release process. Reina Cryptography leverages GitHub Actions to automate the CI/CD pipeline. This automation ensures that every code push is built, tested (ToDo), and released automatically. Additionally, our documentation is dynamically generated and deployed, keeping our project documentation up-to-date with the latest changes. Below are the badges representing the status of the CI/CD pipelines:
 
 - **Build and Release**: This badge reflects the current status of the build and release pipeline, ensuring that every change in the main branch is automatically built and ready for release.  
   [![Build and Release](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/build-and-release.yml/badge.svg)](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/build-and-release.yml)
@@ -222,7 +222,7 @@ This workflow simplifies the process of maintaining up-to-date and accessible do
 
 ### Security Enhancement with a .NET Obfuscator
 
-asdasda
+For an added layer of security, especially when handling sensitive information like Azure Key Vault credentials in your DLL, it is highly recommended to use a .NET Obfuscator. In this context, .NET Reactor emerges as a top choice. It offers advanced protection against reverse engineering, vital to prevent unauthorized access to your Azure Key Vault credentials and the keys it safeguards.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ## Troubleshooting and Support
@@ -234,31 +234,58 @@ asdasda
 
 ### Getting Help and Support Resources
 
-asdasda
+If you encounter any issues or have questions regarding Reina.Cryptography, please feel free to seek assistance through the Issues page.
+
+To open an issue, please visit: [Reina.Cryptography Issues](https://github.com/fkitsantas/Reina.Cryptography/issues).
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ## Contributing to Reina.Cryptography
 
 ### Contribution Guidelines
 
-asdasda
+Contributions to the project are warmly welcomed. If you're interested in contributing, here are some guidelines to help you get started:
+
+1. **Fork the Repository**: Begin by forking the [Reina.Cryptography repository](https://github.com/fkitsantas/Reina.Cryptography) on GitHub.
+
+2. **Create a Branch**: For each new feature or bug fix, create a new branch in your forked repository. This helps keep changes organized.
+
+3. **Code Conventions**: Please follow the existing coding style and conventions. This includes proper documentation for any new code and adhering to the established architectural patterns.
+
+4. **Testing**: Ensure that your code is thoroughly tested. Quality and reliability are paramount, and comprehensive tests help maintain these standards.
+
+5. **Pull Requests**: Once your changes are ready, submit a pull request with a clear description of the changes and any relevant issue numbers.
+
+6. **Code Review**: I will review your pull request. Be open to feedback and ready to make revisions if necessary.
+
+7. **Merging**: After approval, your changes will be merged into the main branch.
+
+Your contributions are crucial in the continuous development and improvement of Reina.Cryptography. I appreciate your efforts in making this project better for everyone.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ### Community and Development Process
 
-asdasda
+The development of Reina.Cryptography is currently a solo endeavor, but I am hopeful that it will grow into a community-driven project. Here's how you can be part of this journey:
+
+- **Stay Updated**: Follow the project on GitHub to stay updated with the latest developments.
+- **Join Discussions**: Participate in discussions on GitHub issues and pull requests. Your insights and feedback are valuable.
+- **Share Your Experiences**: If you've integrated Reina.Cryptography in your project(s), consider sharing your experiences. This helps others learn and grow.
+- **Report Issues**: If you find bugs or have suggestions for improvements, please report them through GitHub issues.
+
+Your engagement and contributions are what will shape the future of Reina.Cryptography. Together, we can build a robust, secure, and user-friendly cryptography library.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ## License and Legal Information
 
 ### Licensing Details
 
-asdasda
+Reina.Cryptography is available under the MIT License, a permissive free software license. This means you are free to use, modify, distribute, and even use the library commercially, as long as you include the original copyright and license notice in any copy of the software or substantial portions of it. The full details of the MIT License can be viewed on the project's [License](LICENSE).
+
+The MIT License offers a great balance between open contribution and allowing freedom for both personal and commercial use, making Reina.Cryptography 
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ### Acknowledgments and Third-Party Licenses
 
-asdasda
+Reina.Cryptography extends its gratitude to the Legion of the Bouncy Castle for their foundational cryptographic library. Their work has been instrumental in the development of this project. For more information about their contributions to the field of cryptography, please visit their [official website](https://www.bouncycastle.org).
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ## About Reina.Cryptography
