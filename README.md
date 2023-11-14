@@ -23,9 +23,9 @@ Reina Cryptography is a state-of-the-art class library for .NET and .NET Framewo
       - [`Decrypt` Method: Detailed Description and Parameters](#decrypt-method-detailed-description-and-parameters)
    - 3.4 [Code Samples and Best Practices](#code-samples-and-best-practices)
 4. [**Project Design**](#project-design)
-   - [Architecture Overview](#architecture-overview)
-   - [Library Structure](#library-structure)
-   - [Streamlined CI/CD with GitHub Actions](#streamlined-cicd-with-github-actions)
+   - 4.1 [Architecture Overview](#architecture-overview)
+   - 4.2 [Library Structure](#library-structure)
+   - 4.3 [Streamlined CI/CD with GitHub Actions](#streamlined-cicd-with-github-actions)
       - [Dependabot](#dependabot)
       - [Build and Release](#build-and-release)
       - [Generate and Deploy Documentation](#generate-and-deploy-documentation)
@@ -180,17 +180,74 @@ asdasda
 
 #### `Configuration` Method: Detailed Description and Parameters
 
-asdasda
+The `Configuration` method is designed to configure the library with custom Azure Key Vault settings. This method must be invoked to set up the necessary parameters for Azure Key Vault before performing encryption or decryption operations. If not called, the library uses default configuration values.
+
+- **Parameters:**
+  - `azureKeyVaultUrl` (string): The URL of the Azure Key Vault.
+  - `azureClientId` (string): The Azure client ID used for authentication.
+  - `azureClientSecret` (string): The Azure client secret for authentication.
+  - `azureTenantId` (string): The Azure tenant ID for authentication.
+
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 #### `Encrypt` Method: Detailed Description and Parameters
 
-asdasda
+The `Encrypt` method in `Reina.Cryptography` library offers flexible encryption capabilities, allowing users to encrypt plaintext strings using either a single key or separate keys for each encryption algorithm. This method supports two overloads:
+
+1. **Three-Key Encryption:**
+   - This overload is designed for enhanced security, employing three distinct cryptographic algorithms—Twofish, Serpent, and AES—each using a separate key.
+   - **Parameters:**
+     - `decryptedString` (string): The plaintext string to be encrypted.
+     - `twofishKeyName` (string): The name of the Twofish key.
+     - `serpentKeyName` (string): The name of the Serpent key.
+     - `aesKeyName` (string): The name of the AES key.
+   - **Returns:** A Base64-encoded string representing the encrypted data.
+   - **Exceptions:**
+     - `ArgumentNullException`: Thrown if the input string or any of the key names is null or empty.
+     - `ArgumentException`: Thrown if any of the key names do not adhere to the expected format.
+
+2. **Single-Key Encryption:**
+   - This overload provides a simpler approach, using a single key name for all three encryption algorithms. It internally calls the three-key overload with the same key name for all three parameters.
+   - **Parameters:**
+     - `decryptedString` (string): The plaintext string to be encrypted.
+     - `keyName` (string): The name of the key to be used for all three encryption algorithms.
+   - **Returns:** A Base64-encoded string representing the encrypted data.
+   - **Exceptions:**
+     - `ArgumentNullException`: Thrown if the input string or the key name is null or empty.
+     - `ArgumentException`: Thrown if the key name does not adhere to the expected format.
+
+Both overloads of the `Encrypt` method are designed to securely interface with Azure Key Vault for key retrieval, ensuring the secure management and storage of cryptographic keys. The choice between using a single key or multiple keys allows for flexibility in balancing security needs and operational simplicity.
+
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 #### `Decrypt` Method: Detailed Description and Parameters
 
-asdasda
+The `Decrypt` method in `Reina.Cryptography` library is reverting the encryption process and retrieving the original plaintext from encrypted data. Like the `Encrypt` method, it supports two overloads for flexible decryption using either a single key or separate keys for each decryption algorithm.
+
+1. **Three-Key Decryption:**
+   - This overload is tailored for scenarios where data was encrypted using three distinct keys for Twofish, Serpent, and AES algorithms. It is essential for maintaining the integrity of the decryption process that the same keys used for encryption are applied here.
+   - **Parameters:**
+     - `encryptedString` (string): The Base64-encoded string to be decrypted.
+     - `twofishKeyName` (string): The name of the Twofish key.
+     - `serpentKeyName` (string): The name of the Serpent key.
+     - `aesKeyName` (string): The name of the AES key.
+   - **Returns:** The decrypted plaintext string.
+   - **Exceptions:**
+     - `ArgumentNullException`: Thrown if the encrypted string or any of the key names is null or empty.
+     - `ArgumentException`: Thrown if any of the key names do not adhere to the expected format.
+
+2. **Single-Key Decryption:**
+   - This simpler overload is useful when the same key name is used for all three decryption algorithms. It internally calls the three-key overload with the same key name for all three parameters.
+   - **Parameters:**
+     - `encryptedString` (string): The Base64-encoded string to be decrypted.
+     - `keyName` (string): The name of the key to be used for all three decryption algorithms.
+   - **Returns:** The decrypted plaintext string.
+   - **Exceptions:**
+     - `ArgumentNullException`: Thrown if the encrypted string or the key name is null or empty.
+     - `ArgumentException`: Thrown if the key name does not adhere to the expected format.
+
+Both overloads of the `Decrypt` method ensure secure interaction with Azure Key Vault for key retrieval, mirroring the encryption process but in reverse. This design choice offers users the flexibility to choose between single-key and multiple-key decryption based on their security requirements and the encryption approach originally used.
+
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ### Code Samples and Best Practices
