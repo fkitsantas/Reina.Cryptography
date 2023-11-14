@@ -167,6 +167,15 @@ asdasda
 
 ### Streamlined CI/CD with GitHub Actions
 
+Continuous Integration and Continuous Deployment (CI/CD) are fundamental practices in modern software development, aimed at enhancing code quality and streamlining the release process. Reina Cryptography project leverages GitHub Actions to automate the CI/CD pipeline. This automation ensures that every code push is built and tested automatically. Additionally, our documentation is dynamically generated and deployed, keeping our project documentation up-to-date with the latest changes. Below are the badges representing the status of our CI/CD pipelines:
+
+- **Build and Release**: This badge reflects the current status of the build and release pipeline, ensuring that every change in the main branch is automatically built and ready for release.  
+  [![Build and Release](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/build-and-release.yml/badge.svg)](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/build-and-release.yml)
+
+- **Generate and Deploy Documentation**: This badge indicates the status of the documentation generation and deployment process. It ensures that the documentation is always synchronized with the latest version of the code.  
+  [![Generate and Deploy Documentation](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/generate-and-deploy-documentation.yml/badge.svg)](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/generate-and-deploy-documentation.yml)
+
+
 #### Dependabot
 
 Reina Cryptography leverages GitHub's Dependabot to ensure all dependencies are up-to-date. Dependabot checks daily for updates in project dependencies and automatically creates pull requests to update the `PackageReference` versions in the project file. This proactive approach ensures that the library is always using the latest, most secure versions of its dependencies, reducing the risk of vulnerabilities.
