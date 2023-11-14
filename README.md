@@ -279,8 +279,6 @@ Your engagement and contributions are what will shape the future of Reina.Crypto
 ### Licensing Details
 
 Reina.Cryptography is available under the MIT License, a permissive free software license. This means you are free to use, modify, distribute, and even use the library commercially, as long as you include the original copyright and license notice in any copy of the software or substantial portions of it. The full details of the MIT License can be viewed on the project's [License](LICENSE).
-
-The MIT License offers a great balance between open contribution and allowing freedom for both personal and commercial use, making Reina.Cryptography 
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ### Acknowledgments and Third-Party Licenses
