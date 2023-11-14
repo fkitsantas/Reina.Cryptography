@@ -175,7 +175,7 @@ The key architectural components are as follows:
 
 ### Streamlined CI/CD with GitHub Actions
 
-Continuous Integration and Continuous Deployment (CI/CD) are fundamental practices in modern software development, aimed at enhancing code quality and streamlining the release process. Reina Cryptography leverages GitHub Actions to automate the CI/CD pipeline. This automation ensures that every code push is built, tested (ToDo), and released automatically. Additionally, our documentation is dynamically generated and deployed, keeping our project documentation up-to-date with the latest changes. Below are the badges representing the status of the CI/CD pipelines:
+Continuous Integration and Continuous Deployment (CI/CD) are fundamental practices in modern software development, aimed at enhancing code quality and streamlining the release process. Reina Cryptography leverages GitHub Actions to automate the CI/CD pipeline. This automation ensures that every code push is built, tested (ToDo), and released automatically. Additionally, the documentation is dynamically generated and deployed, keeping the project's documentation up-to-date with the latest changes. Below are the badges representing the status of the CI/CD pipelines:
 
 - **Build and Release**: This badge reflects the current status of the build and release pipeline, ensuring that every change in the main branch is automatically built and ready for release.  
   [![Build and Release](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/build-and-release.yml/badge.svg)](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/build-and-release.yml)
