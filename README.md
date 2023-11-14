@@ -21,7 +21,7 @@ Reina Cryptography is a state-of-the-art class library for .NET and .NET Framewo
       - [`Configuration` Method: Detailed Description and Parameters](#configuration-method-detailed-description-and-parameters)
       - [`Encrypt` Method: Detailed Description and Parameters](#encrypt-method-detailed-description-and-parameters)
       - [`Decrypt` Method: Detailed Description and Parameters](#decrypt-method-detailed-description-and-parameters)
-   - 3.4 [Code Samples and Best Practices](#code-samples-and-best-practices)
+   - 3.4 [Integration and Usage of Reina.Cryptography Library](#integration-and-usage-of-reinacryptography-library)
 4. [**Project Design**](#project-design)
    - 4.1 [Architecture Overview](#architecture-overview)
    - 4.2 [Library Structure](#library-structure)
@@ -258,9 +258,43 @@ Both overloads of the `Decrypt` method ensure secure interaction with Azure Key 
 
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
-### Code Samples and Best Practices
+#### Integration and Usage of Reina.Cryptography Library
 
-asdasdaasd
+Integrating and using the `Reina.Cryptography` library in your projects is a straightforward process that enhances the security of your data through robust encryption and decryption functionalities. Here’s how you can seamlessly incorporate and utilize this library:
+
+##### Referencing the Library
+Firstly, ensure that the `Reina.Cryptography.dll` is referenced in your project. This DLL contains all the necessary components for encryption and decryption operations.
+
+##### Using the Library in Your Code
+After referencing the DLL, you can use the library's functionalities in any .cs file within your project. Follow these steps:
+
+1. **Add a Namespace Reference:**
+   - At the top of your .cs file, include a using directive for the `Reina.Cryptography.Library`. This enables you to access the library's methods easily.
+   - Example:
+     ```csharp
+     using ReinaCryptography = Reina.Cryptography.Library;
+     ```
+
+2. **Calling Encrypt and Decrypt Methods:**
+   - You can directly call the `Encrypt` or `Decrypt` methods in your code. These methods are available for different use cases, as shown below:
+     - Encrypting with a single key name:
+       ```csharp
+       string encryptedText = ReinaCryptography.Encrypt("YourStringHere", "KeyName");
+       ```
+     - Encrypting with three key names (for Twofish, Serpent, and AES):
+       ```csharp
+       string encryptedText = ReinaCryptography.Encrypt("YourStringHere", "TwofishKeyName", "SerpentKeyName", "AESKeyName");
+       ```
+     - Similarly, use the `Decrypt` method for decryption:
+       ```csharp
+       string decryptedText = ReinaCryptography.Decrypt("YourEncryptedString", "KeyName");
+       // Or
+       string decryptedText = ReinaCryptography.Decrypt("YourEncryptedString", "TwofishKeyName", "SerpentKeyName", "AESKeyName");
+       ```
+
+##### Key Management in Azure Key Vault
+- When using a single key name with the `Encrypt` method, the library interacts with Azure Key Vault to retrieve the corresponding 256-bit key. If the key does not exist, it will automatically create a 256-bit key in Azure Key Vault under the provided name. This key is then used for the cascading encryption process (Twofish, Serpent, AES) with unique IVs for each stage.
+- If three key names are provided, the library follows a similar procedure but retrieves or creates separate 256-bit keys for each encryption algorithm. This approach ensures that each encryption stage (Twofish, Serpent, AES) uses a distinct key, enhancing the security of the encryption process.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ## Project Design
