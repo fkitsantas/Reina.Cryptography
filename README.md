@@ -459,6 +459,10 @@ Reina.Cryptography is available under the MIT License, a permissive free softwar
 ### Acknowledgments and Third-Party Licenses
 
 Reina.Cryptography extends its gratitude to the Legion of the Bouncy Castle for their foundational cryptographic library. Their work has been instrumental in the development of this project. For more information about their contributions to the field of cryptography, please visit their [official website](https://www.bouncycastle.org).
+
+In addition, thanks to [Fody](https://github.com/Fody/Fody) and [Fody.Costura](https://github.com/Fody/Costura) for the ability to embed dependencies directly into the produced DLL of a Class Library. This functionality has greatly streamlined the end-user experience by simplifying the management of dependencies.
+
+Special acknowledgment goes to Tom Englert ([@tom-englert](https://github.com/tom-englert)) for his guidance in configuring Fody.Costura for multi-target support in this project.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ## About Reina.Cryptography
