@@ -157,12 +157,20 @@ asdasdaasd
 
 ### Architecture Overview
 
-asdasda
+The key architectural components are as follows:
+1. **Interface Layer**: Defines the contract for each module, ensuring a clear separation of concerns and promoting a plug-and-play approach.
+2. **Implementation Layer**: Contains concrete implementations of the interfaces, providing the core functionalities of the library. This layer ensures that each module can be extended or replaced without affecting other parts of the system.
+3. **Integration with Azure Key Vault**: The key management module integrates with Azure Key Vault, ensuring that encryption keys are securely managed and stored.
+4. **Exception Handling**: Comprehensive exception handling ensures that any issues, whether related to configuration, encryption, or key management, are clearly communicated to the developer.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ### Library Structure
 
-asdasda
+- **Configuration**: Contains the `Config` class which manages the configuration settings for accessing Azure Key Vault.
+- **Decryption**: Contains the `DataDecryptor` class responsible for decrypting data.
+- **Encryption**: Contains the `DataEncryptor` class responsible for encrypting data.
+- **Interfaces**: Defines the interfaces for configuration, encryption, decryption, and key management.
+- **Key Management**: Contains the `AzureKVKeyManager` class which integrates with Azure Key Vault for key management.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>
 
 ### Streamlined CI/CD with GitHub Actions
