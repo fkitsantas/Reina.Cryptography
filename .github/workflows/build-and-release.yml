@@ -12,8 +12,6 @@ on:
 jobs:
   build-and-release:
     runs-on: windows-latest
-    env:
-      version: "1.0.0"
     permissions:
       contents: write
       packages: write
@@ -65,9 +63,8 @@ jobs:
           }
           $newVersion = "$major.$minor.$build"
           echo "New version: $newVersion"
-          echo "version=$newVersion" >> $GITHUB_ENV
-          echo "Set version to $newVersion"
-
+          echo "version=$newVersion" | Out-File -FilePath $Env:GITHUB_ENV -Append -Encoding utf8
+          
       - name: Debug - Print version
         run: echo "Version set to ${{ env.version }}"
         
