@@ -12,6 +12,8 @@ on:
 jobs:
   build-and-release:
     runs-on: windows-latest
+    env:
+      version: "1.0.0"
     permissions:
       contents: write
       packages: write
