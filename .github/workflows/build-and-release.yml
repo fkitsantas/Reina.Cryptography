@@ -26,7 +26,7 @@ jobs:
         id: commit_message
         run: |
           $commitMessage = git log -1 --pretty=%B
-          echo "message=$commitMessage" >> $GITHUB_ENV
+          echo "::set-output name=message::$commitMessage"
 
       # Calculate version number
       - name: Calculate version
@@ -63,11 +63,8 @@ jobs:
           }
           $newVersion = "$major.$minor.$build"
           echo "New version: $newVersion"
-          echo "version=$newVersion" | Out-File -FilePath $Env:GITHUB_ENV -Append -Encoding utf8
-          
-      - name: Debug - Print version
-        run: echo "Version set to ${{ env.version }}"
-        
+          echo "::set-output name=version::$newVersion"
+
       # Update .csproj file
       - name: Update project version
         run: |
@@ -76,7 +73,7 @@ jobs:
 
           # Check if VersionPrefix exists and update it
           if ($csproj.Project.PropertyGroup.VersionPrefix) {
-              $csproj.Project.PropertyGroup.VersionPrefix = "${{ env.version }}"
+              $csproj.Project.PropertyGroup.VersionPrefix = "${{ steps.version.outputs.version }}"
           } else {
               Write-Error "<VersionPrefix> not found in $csprojPath"
               exit 1
@@ -86,7 +83,7 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add $csprojPath
-          git commit -m "Update version to ${{ env.version }}"
+          git commit -m "Update version to ${{ steps.version.outputs.version }}"
           git push
 
       # Install dependencies and build for both target frameworks
@@ -103,12 +100,13 @@ jobs:
       # Create a release
       - name: Create Release
         id: create_release
-        uses: marvinpinto/action-automatic-releases@v1.2.1
+        uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: ${{ env.version }}
+          automatic_release_tag: ${{ steps.version.outputs.version }}
           prerelease: false
-          title: "Latest Build v${{ env.version }}"
+          title: "Latest Build v${{ steps.version.outputs.version }}"
+          body: ${{ steps.commit_message.outputs.message }}
 
       # Upload .dll for .NET Framework 4.8.1 as an asset to the release
       - name: Upload .NET Framework 4.8.1 DLL
