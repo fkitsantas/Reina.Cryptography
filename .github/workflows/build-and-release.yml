@@ -105,7 +105,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: ${{ steps.version.outputs.version }}
           prerelease: false
-          title: "Latest Build v${{ steps.version.outputs.version }}"
+          title: "Reina.Cryptography v${{ steps.version.outputs.version }}"
           body: ${{ steps.commit_message.outputs.message }}
 
       # Upload .dll for .NET Framework 4.8.1 as an asset to the release
