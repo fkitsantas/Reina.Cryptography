@@ -64,6 +64,9 @@ jobs:
           $newVersion = "$major.$minor.$build"
           echo "New version: $newVersion"
           echo "version=$newVersion" >> $GITHUB_ENV
+
+      - name: Debug - Print version
+        run: echo "Version set to ${{ env.version }}"
         
       # Update .csproj file
       - name: Update project version
@@ -103,10 +106,9 @@ jobs:
         uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: "${{ env.version }}"
+          automatic_release_tag: ${{ env.version }}
           prerelease: false
           title: "Latest Build v${{ env.version }}"
-          body: "${{ env.message }}"
 
       # Upload .dll for .NET Framework 4.8.1 as an asset to the release
       - name: Upload .NET Framework 4.8.1 DLL
