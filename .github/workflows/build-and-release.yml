@@ -26,7 +26,7 @@ jobs:
         id: commit_message
         run: |
           $commitMessage = git log -1 --pretty=%B
-          echo "::set-output name=message::$commitMessage"
+          echo "message=$commitMessage" >> $GITHUB_ENV
 
       # Calculate version number
       - name: Calculate version
@@ -63,7 +63,7 @@ jobs:
           }
           $newVersion = "$major.$minor.$build"
           echo "New version: $newVersion"
-          echo "::set-output name=version::$newVersion"
+          echo "version=$newVersion" >> $GITHUB_ENV
 
       # Update .csproj file
       - name: Update project version
@@ -103,10 +103,10 @@ jobs:
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: ${{ steps.version.outputs.version }}
+          automatic_release_tag: ${{ env.version }}
           prerelease: false
-          title: "Latest Build v${{ steps.version.outputs.version }}"
-          body: ${{ steps.commit_message.outputs.message }}
+          title: "Latest Build v${{ env.version }}"
+          body: ${{ env.message }}
 
       # Upload .dll for .NET Framework 4.8.1 as an asset to the release
       - name: Upload .NET Framework 4.8.1 DLL
