@@ -64,7 +64,7 @@ jobs:
           $newVersion = "$major.$minor.$build"
           echo "New version: $newVersion"
           echo "version=$newVersion" >> $GITHUB_ENV
-
+        
       # Update .csproj file
       - name: Update project version
         run: |
@@ -73,7 +73,7 @@ jobs:
 
           # Check if VersionPrefix exists and update it
           if ($csproj.Project.PropertyGroup.VersionPrefix) {
-              $csproj.Project.PropertyGroup.VersionPrefix = "${{ steps.version.outputs.version }}"
+              $csproj.Project.PropertyGroup.VersionPrefix = "${{ env.version }}"
           } else {
               Write-Error "<VersionPrefix> not found in $csprojPath"
               exit 1
