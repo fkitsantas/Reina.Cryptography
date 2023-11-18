@@ -64,6 +64,7 @@ jobs:
           $newVersion = "$major.$minor.$build"
           echo "New version: $newVersion"
           echo "version=$newVersion" >> $GITHUB_ENV
+          echo "Set version to $newVersion"
 
       - name: Debug - Print version
         run: echo "Version set to ${{ env.version }}"
