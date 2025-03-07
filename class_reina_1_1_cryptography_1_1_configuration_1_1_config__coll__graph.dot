@@ -1,11 +1,12 @@
 digraph "Reina.Cryptography.Configuration.Config"
 {
  // LATEX_PDF_SIZE
-  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
-  node [fontname="FreeSans",fontsize="10",shape=record];
-  Node1 [label="Reina.Cryptography.Configuration.\lConfig",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Represents the configuration settings for accessing Azure Key Vault. This class follows the Singleton..."];
-  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node2 [label="IConfiguration",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_reina_1_1_cryptography_1_1_interfaces_1_1_i_configuration.html",tooltip=" "];
-  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _instance" ,fontname="FreeSans"];
-  Node3 [label="static readonly Lazy\l\< Reina.Cryptography.Configuration.\lConfig \>",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [id="Node000001",label="Reina.Cryptography.Configuration.\lConfig",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Represents the configuration settings for accessing Azure Key Vault. This class follows the Singleton..."];
+  Node2 -> Node1 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="IConfiguration",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$interface_reina_1_1_cryptography_1_1_interfaces_1_1_i_configuration.html",tooltip=" "];
+  Node3 -> Node1 [id="edge2_Node000001_Node000003",dir="back",color="darkorchid3",style="dashed",tooltip=" ",label=" _instance",fontcolor="grey" ];
+  Node3 [id="Node000003",label="static readonly Lazy\l\< Reina.Cryptography.Configuration.\lConfig \>",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",tooltip=" "];
 }

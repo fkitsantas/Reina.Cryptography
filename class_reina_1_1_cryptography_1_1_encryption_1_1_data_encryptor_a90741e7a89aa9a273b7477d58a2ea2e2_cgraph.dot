@@ -1,0 +1,15 @@
+digraph "Reina.Cryptography.Encryption.DataEncryptor.Encrypt"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="Reina.Cryptography.Encryption.\lDataEncryptor.Encrypt",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Encrypts the specified plaintext data using a layered approach with Twofish, Serpent,..."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="Reina.Cryptography.Encryption.\lDataEncryptor.EncryptWithAES",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_reina_1_1_cryptography_1_1_encryption_1_1_data_encryptor.html#af362d23fce841a0b8b830772d4788947",tooltip="Encrypts the data using the AES algorithm in its default mode with an auto-generated IV."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="Reina.Cryptography.Encryption.\lDataEncryptor.EncryptWithSerpent",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_reina_1_1_cryptography_1_1_encryption_1_1_data_encryptor.html#a3ac90a7738c420c6216e3747400292b7",tooltip="Encrypts the data using the Serpent algorithm in CBC mode with PKCS7 padding."];
+  Node1 -> Node4 [id="edge3_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="Reina.Cryptography.Encryption.\lDataEncryptor.EncryptWithTwofish",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_reina_1_1_cryptography_1_1_encryption_1_1_data_encryptor.html#adca4f39dcd35ae6b7d5875cc2e6d1ac5",tooltip="Encrypts the data using the Twofish algorithm in CBC mode with PKCS7 padding."];
+}

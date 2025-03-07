@@ -1,0 +1,11 @@
+digraph "Reina.Cryptography.KeyManagement.AzureKVKeyManager.GetEncryptionKeyAsync"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="Reina.Cryptography.KeyManagement.\lAzureKVKeyManager.GetEncryptionKeyAsync",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Asynchronously retrieves an encryption key from Azure Key Vault or the local cache."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="Reina.Cryptography.KeyManagement.\lAzureKVKeyManager.Generate256bitKey",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#aa6d24f34039e3f3a396f2d00c5beeaaa",tooltip="Generates a new 256-bit cryptographic key."];
+}
