@@ -4,20 +4,31 @@
 		<IncludeAssemblies>
 			Azure.Identity
 			Azure.Security.KeyVault.Keys
-			Azure.Security.KeyVault.Secrets
-			Azure.Core
-			Microsoft.Extensions.Configuration
-			Microsoft.Identity.Client
-			Microsoft.IdentityModel.Abstractions
-			System.Threading.Tasks.Extensions
-			System.Memory.Data
-			System.Memory
-			System.Diagnostics.DiagnosticSource
-			System.Text.Json
-			System.Runtime.CompilerServices.Unsafe
-			System.Buffers
-			System.Numerics.Vectors
-			BouncyCastle.Cryptography
+		        Azure.Security.KeyVault.Secrets
+		        Azure.Core
+		        Microsoft.Extensions.Configuration
+		        Microsoft.Identity.Client
+		        Microsoft.IdentityModel.Abstractions
+		        System.Memory.Data
+		        System.Text.Json
+		        BouncyCastle.Cryptography
+		        Microsoft.Bcl.AsyncInterfaces
+		        Microsoft.Extensions.Configuration.Abstractions
+		        Microsoft.Extensions.Primitives
+		        Microsoft.Identity.Client.Extensions.Msal
+		        System.Buffers
+		        System.ClientModel
+		        System.Diagnostics.DiagnosticSource
+		        System.IO.FileSystem.AccessControl
+		        System.Memory
+		        System.Numerics.Vectors
+		        System.Runtime.CompilerServices.Unsafe
+		        System.Security.AccessControl
+		        System.Security.Cryptography.ProtectedData
+		        System.Security.Principal.Windows
+		        System.Text.Encodings.Web
+		        System.Threading.Tasks.Extensions
+		        System.ValueTuple
 		</IncludeAssemblies>
 	</Costura>
 </Weavers>
