@@ -1,4 +1,5 @@
-﻿using Azure.Identity;
+﻿using Azure.Core;
+using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using Reina.Cryptography.Configuration;
 using Reina.Cryptography.Interfaces;
@@ -45,104 +46,212 @@ namespace Reina.Cryptography.KeyManagement
         /// <param name="tenantId">The tenant ID for Azure Active Directory authentication.</param>
         public AzureKVKeyManager(string vaultUri, string clientId, string clientSecret, string tenantId)
         {
-            SecretClientOptions clientOptions = new();
-            ClientSecretCredential clientCredential = new(tenantId, clientId, clientSecret);
-            _secretClient = new SecretClient(new Uri(vaultUri), clientCredential, clientOptions);
+            var clientOptions = new SecretClientOptions
+            {
+                Retry =
+                {
+                    Delay = TimeSpan.FromSeconds(1),
+                    MaxDelay = TimeSpan.FromSeconds(10),
+                    MaxRetries = 5,
+                    Mode = RetryMode.Exponential
+                }
+            };
+
+            var credential = new ClientSecretCredential(tenantId, clientId, clientSecret);
+            _secretClient = new SecretClient(new Uri(vaultUri), credential, clientOptions);
         }
 
         /// <summary>
         /// Asynchronously retrieves an encryption key from Azure Key Vault or the local cache.
         /// </summary>
-        /// <param name="keyName">The name of the key to retrieve.</param>
+        /// <param name="baseKeyName">The name of the key to retrieve.</param>
         /// <returns>A byte array containing the encryption key.</returns>
         /// <exception cref="UnauthorizedAccessException">Thrown when authentication or authorization with Azure Key Vault fails.</exception>
         /// <exception cref="Exception">Thrown when an unexpected error occurs during key retrieval or generation.</exception>
-        public async Task<byte[]> GetEncryptionKeyAsync(string keyName)
+        public async Task<byte[]> GetEncryptionKeyAsync(string baseKeyName)
         {
-            // Attempt to retrieve the key from cache.
-            if (_keyCache.TryGetValue(keyName, out var cachedKey))
-                return cachedKey;
+            try
+            {
+                if (_keyCache.TryGetValue(baseKeyName, out var cachedKey))
+                    return cachedKey;
 
+                var (versionedName, key) = await EnsureRotatedKeyAsync(baseKeyName).ConfigureAwait(false);
+                _keyCache[baseKeyName] = key;
+                return key;
+            }
+            catch (Azure.RequestFailedException ex) when (ex.Status == 401)
+            {
+                throw new UnauthorizedAccessException("Failed to authenticate with Azure Key Vault. Check credentials.", ex);
+            }
+            catch (Azure.RequestFailedException ex) when (ex.Status == 403)
+            {
+                throw new UnauthorizedAccessException("Access denied. Check Key Vault permissions.", ex);
+            }
+            catch (Azure.RequestFailedException ex)
+            {
+                throw new Exception($"Azure Key Vault error: {ex.Message}", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Unexpected error in GetEncryptionKeyAsync: {ex.Message}", ex);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously retrieves an encryption key from Azure Key Vault or the local cache.
+        /// </summary>
+        /// <param name="baseKeyName">The base name of the key to retrieve (without version suffix).</param>
+        /// <returns>A byte array containing the encryption key.</returns>
+        /// <exception cref="UnauthorizedAccessException">Thrown when authentication or authorization with Azure Key Vault fails.</exception>
+        /// <exception cref="Exception">Thrown when an unexpected error occurs during key retrieval or generation.</exception>
+
+        public async Task<List<byte[]>> GetDecryptionKeysAsync(string baseKeyName)
+        {
             var cfg = Config.Instance;
-            var versionPattern = new Regex($"^{Regex.Escape(keyName)}--v(\\d+)$", RegexOptions.Compiled);
+            var versionPattern = new Regex($"^{Regex.Escape(baseKeyName)}--v(\\d+)$", RegexOptions.Compiled);
             var versions = new List<(int Version, SecretProperties Props)>();
 
             try
             {
-                await foreach (var prop in _secretClient.GetPropertiesOfSecretsAsync())
+                await foreach (var prop in _secretClient.GetPropertiesOfSecretsAsync().ConfigureAwait(false))
                 {
                     var match = versionPattern.Match(prop.Name);
                     if (match.Success && int.TryParse(match.Groups[1].Value, out int version))
-                    {
                         versions.Add((version, prop));
-                    }
                 }
-
-                string resolvedKeyName;
-                byte[] resolvedKey;
 
                 if (versions.Count == 0)
                 {
-                    resolvedKeyName = $"{keyName}--v1";
-                    resolvedKey = Generate256bitKey();
-                    await _secretClient.SetSecretAsync(resolvedKeyName, Convert.ToBase64String(resolvedKey));
+                    var freshKey = await GetEncryptionKeyAsync(baseKeyName).ConfigureAwait(false);
+                    return new List<byte[]> { freshKey };
                 }
-                else
+
+                var sorted = versions.OrderByDescending(v => v.Version).ToList();
+                var keys = new List<byte[]>();
+
+                foreach (var (v, prop) in sorted)
                 {
-                    var sorted = versions.OrderByDescending(x => x.Version).ToList();
-                    var (latestVersion, latestProp) = sorted.First();
-                    var created = latestProp.CreatedOn ?? DateTimeOffset.UtcNow;
-
-                    if (created.Add(cfg.KeyRotationThreshold) <= DateTimeOffset.UtcNow)
+                    if (_keyCache.TryGetValue(prop.Name, out var cached))
                     {
-                        // Rotate
-                        int newVersion = latestVersion + 1;
-                        resolvedKeyName = $"{keyName}--v{newVersion}";
-                        resolvedKey = Generate256bitKey();
-                        await _secretClient.SetSecretAsync(resolvedKeyName, Convert.ToBase64String(resolvedKey));
-                    }
-                    else
-                    {
-                        // Use existing latest
-                        resolvedKeyName = latestProp.Name;
-                        KeyVaultSecret secret = (await _secretClient.GetSecretAsync(resolvedKeyName)).Value;
-                        resolvedKey = Convert.FromBase64String(secret.Value);
+                        keys.Add(cached);
+                        continue;
                     }
 
-                    // Cleanup old versions
-                    var cutoff = DateTimeOffset.UtcNow.Subtract(cfg.KeyRetentionPeriod);
-                    foreach (var (v, prop) in sorted)
+                    try
                     {
-                        if ((prop.CreatedOn ?? DateTimeOffset.UtcNow) < cutoff)
-                        {
-                            try { await _secretClient.StartDeleteSecretAsync(prop.Name); } 
-                            catch { /* Ignore errors during deletion */}
-                        }
+                        var secret = (await _secretClient.GetSecretAsync(prop.Name).ConfigureAwait(false)).Value;
+                        var key = Convert.FromBase64String(secret.Value);
+                        _keyCache[prop.Name] = key;
+                        keys.Add(key);
+                    }
+                    catch
+                    {
+                        // Ignore and skip missing/invalid secrets
                     }
                 }
 
-                _keyCache[keyName] = resolvedKey;
-                return resolvedKey;
+                // Ensure rotation during decryption flow
+                await EnsureRotatedKeyAsync(baseKeyName).ConfigureAwait(false);
+
+                return keys;
             }
             catch (Azure.RequestFailedException ex) when (ex.Status == 401)
             {
-                // Handles authentication failures.
                 throw new UnauthorizedAccessException("Failed to authenticate with Azure Key Vault. Please check your credentials.", ex);
             }
             catch (Azure.RequestFailedException ex) when (ex.Status == 403)
             {
-                // Handles authorization failures.
                 throw new UnauthorizedAccessException("Access denied. The application does not have the necessary permissions to access the Azure Key Vault secret.", ex);
             }
             catch (Azure.RequestFailedException ex)
             {
-                // Handles general Azure Key Vault access errors.
                 throw new Exception($"An error occurred while accessing Azure Key Vault: {ex.Message}", ex);
             }
             catch (Exception ex)
             {
-                // Handles all other exceptions.
                 throw new Exception($"An unexpected error occurred: {ex.Message}", ex);
+            }
+        }
+
+        /// <summary>
+        /// Ensures that a cryptographic key is present and rotated if necessary based on the configured threshold.
+        /// If no key exists, it creates the initial version. If the latest version is older than the rotation threshold, it creates a new version.
+        /// Also cleans up versions older than the configured retention period.
+        /// </summary>
+        /// <param name="baseKeyName">The base name of the key (without version suffix).</param>
+        /// <returns>
+        /// A tuple containing the versioned key name and the associated 256-bit key as a byte array.
+        /// </returns>
+        /// <exception cref="UnauthorizedAccessException">
+        /// Thrown when authentication or authorization with Azure Key Vault fails.
+        /// </exception>
+        /// <exception cref="Exception">
+        /// Thrown when an error occurs during the retrieval, creation, or rotation of secrets.
+        /// </exception>
+        private async Task<(string versionedName, byte[] key)> EnsureRotatedKeyAsync(string baseKeyName)
+        {
+            try
+            {
+                var cfg = Config.Instance;
+                var versionPattern = new Regex($"^{Regex.Escape(baseKeyName)}--v(\\d+)$", RegexOptions.Compiled);
+                var versions = new List<(int, SecretProperties)>();
+
+                await foreach (var prop in _secretClient.GetPropertiesOfSecretsAsync())
+                {
+                    var match = versionPattern.Match(prop.Name);
+                    if (match.Success && int.TryParse(match.Groups[1].Value, out int version))
+                        versions.Add((version, prop));
+                }
+
+                if (versions.Count == 0)
+                {
+                    string name = $"{baseKeyName}--v1";
+                    byte[] key = Generate256bitKey();
+                    await _secretClient.SetSecretAsync(name, Convert.ToBase64String(key)).ConfigureAwait(false);
+                    return (name, key);
+                }
+
+                var sorted = versions.OrderByDescending(v => v.Item1).ToList();
+                var (latestVersion, latestProp) = sorted.First();
+                var created = latestProp.CreatedOn ?? DateTimeOffset.UtcNow;
+
+                if (created.Add(cfg.KeyRotationThreshold) <= DateTimeOffset.UtcNow)
+                {
+                    int newVersion = latestVersion + 1;
+                    string name = $"{baseKeyName}--v{newVersion}";
+                    byte[] key = Generate256bitKey();
+                    await _secretClient.SetSecretAsync(name, Convert.ToBase64String(key)).ConfigureAwait(false);
+
+                    var cutoff = DateTimeOffset.UtcNow.Subtract(cfg.KeyRetentionPeriod);
+                    foreach (var (_, prop) in sorted)
+                    {
+                        if ((prop.CreatedOn ?? DateTimeOffset.UtcNow) < cutoff)
+                            try { await _secretClient.StartDeleteSecretAsync(prop.Name).ConfigureAwait(false); } catch { }
+                    }
+
+                    return (name, key);
+                }
+                else
+                {
+                    var secret = await _secretClient.GetSecretAsync(latestProp.Name);
+                    return (latestProp.Name, Convert.FromBase64String(secret.Value.Value));
+                }
+            }
+            catch (Azure.RequestFailedException ex) when (ex.Status == 401)
+            {
+                throw new UnauthorizedAccessException("Failed to authenticate with Azure Key Vault. Check credentials.", ex);
+            }
+            catch (Azure.RequestFailedException ex) when (ex.Status == 403)
+            {
+                throw new UnauthorizedAccessException("Access denied. Check Key Vault permissions.", ex);
+            }
+            catch (Azure.RequestFailedException ex)
+            {
+                throw new Exception($"Azure Key Vault error: {ex.Message}", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Unexpected error in EnsureRotatedKeyAsync: {ex.Message}", ex);
             }
         }
 

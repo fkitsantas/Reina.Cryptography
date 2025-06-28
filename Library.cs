@@ -1,8 +1,9 @@
-﻿using Reina.Cryptography.Encryption;
+﻿using Reina.Cryptography.Configuration;
 using Reina.Cryptography.Decryption;
-using Reina.Cryptography.Configuration;
+using Reina.Cryptography.Encryption;
 using Reina.Cryptography.KeyManagement;
 using System;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -87,20 +88,38 @@ namespace Reina.Cryptography
             // Validate input parameters.
             ValidateInput(encryptedString, twofishKeyName, serpentKeyName, aesKeyName);
 
-            // Retrieve the decryption keys from the Azure Key Vault.
-            byte[] twofishKey = AzureKVKeyManager.Instance.GetEncryptionKeyAsync(twofishKeyName).GetAwaiter().GetResult();
-            byte[] serpentKey = AzureKVKeyManager.Instance.GetEncryptionKeyAsync(serpentKeyName).GetAwaiter().GetResult();
-            byte[] aesKey = AzureKVKeyManager.Instance.GetEncryptionKeyAsync(aesKeyName).GetAwaiter().GetResult();
+            // Retrieve all decryption key versions.
+            var twofishKeys = AzureKVKeyManager.Instance.GetDecryptionKeysAsync(twofishKeyName).GetAwaiter().GetResult();
+            var serpentKeys = AzureKVKeyManager.Instance.GetDecryptionKeysAsync(serpentKeyName).GetAwaiter().GetResult();
+            var aesKeys = AzureKVKeyManager.Instance.GetDecryptionKeysAsync(aesKeyName).GetAwaiter().GetResult();
 
-            // Initialize the decryptor with the retrieved keys.
-            var dataDecryptor = new DataDecryptor(twofishKey, serpentKey, aesKey);
             // Convert the Base64 encoded string to a byte array.
             byte[] encryptedBytes = Convert.FromBase64String(encryptedString);
-            // Decrypt the data.
-            byte[] decryptedBytes = dataDecryptor.Decrypt(encryptedBytes);
 
-            // Return the decrypted data as a plaintext string.
-            return Encoding.UTF8.GetString(decryptedBytes);
+            foreach (var tf in twofishKeys)
+            {
+                foreach (var sp in serpentKeys)
+                {
+                    foreach (var aes in aesKeys)
+                    {
+                        try
+                        {
+                            // Initialize the decryptor with the retrieved keys.
+                            var decryptor = new DataDecryptor(tf, sp, aes);
+                            // Decrypt the data.
+                            var decryptedBytes = decryptor.Decrypt(encryptedBytes);
+                            // Return the decrypted data as a plaintext string.
+                            return Encoding.UTF8.GetString(decryptedBytes);
+                        }
+                        catch
+                        {
+                            // Ignore failed attempts and try the next combination
+                        }
+                    }
+                }
+            }
+
+            throw new CryptographicException("Decryption failed with all available key combinations.");
         }
 
         /// <summary>
