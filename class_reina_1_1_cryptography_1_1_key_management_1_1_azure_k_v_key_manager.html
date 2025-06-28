@@ -134,7 +134,7 @@ Static Private Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manages 256-bit cryptographic keys by interfacing with Azure Key Vault, providing secure storage and retrieval of keys. This class implements a caching mechanism to optimize key retrieval performance by reducing the number of round trips to the key vault. </p>
 
-<p class="definition">Definition at line <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00016">16</a> of file <a class="el" href="_azure_k_v_key_manager_8cs_source.html">AzureKVKeyManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00017">17</a> of file <a class="el" href="_azure_k_v_key_manager_8cs_source.html">AzureKVKeyManager.cs</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af5aaf547ee232991879a67abc406a492" name="af5aaf547ee232991879a67abc406a492"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af5aaf547ee232991879a67abc406a492">&#9670;&#160;</a></span>AzureKVKeyManager()</h2>
@@ -193,15 +193,15 @@ Static Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00045">45</a> of file <a class="el" href="_azure_k_v_key_manager_8cs_source.html">AzureKVKeyManager.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   46</span>        {</div>
-<div class="line"><span class="lineno">   47</span>            SecretClientOptions clientOptions = <span class="keyword">new</span>();</div>
-<div class="line"><span class="lineno">   48</span>            ClientSecretCredential clientCredential = <span class="keyword">new</span>(tenantId, clientId, clientSecret);</div>
-<div class="line"><span class="lineno">   49</span>            <a class="code hl_variable" href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#a0f0d684424e6f369769493e5d9023cf3">_secretClient</a> = <span class="keyword">new</span> SecretClient(<span class="keyword">new</span> Uri(vaultUri), clientCredential, clientOptions);</div>
-<div class="line"><span class="lineno">   50</span>        }</div>
-<div class="ttc" id="aclass_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager_html_a0f0d684424e6f369769493e5d9023cf3"><div class="ttname"><a href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#a0f0d684424e6f369769493e5d9023cf3">Reina.Cryptography.KeyManagement.AzureKVKeyManager._secretClient</a></div><div class="ttdeci">readonly SecretClient _secretClient</div><div class="ttdef"><b>Definition</b> <a href="_azure_k_v_key_manager_8cs_source.html#l00018">AzureKVKeyManager.cs:18</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00046">46</a> of file <a class="el" href="_azure_k_v_key_manager_8cs_source.html">AzureKVKeyManager.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   47</span>        {</div>
+<div class="line"><span class="lineno">   48</span>            SecretClientOptions clientOptions = <span class="keyword">new</span>();</div>
+<div class="line"><span class="lineno">   49</span>            ClientSecretCredential clientCredential = <span class="keyword">new</span>(tenantId, clientId, clientSecret);</div>
+<div class="line"><span class="lineno">   50</span>            <a class="code hl_variable" href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#a0f0d684424e6f369769493e5d9023cf3">_secretClient</a> = <span class="keyword">new</span> SecretClient(<span class="keyword">new</span> Uri(vaultUri), clientCredential, clientOptions);</div>
+<div class="line"><span class="lineno">   51</span>        }</div>
+<div class="ttc" id="aclass_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager_html_a0f0d684424e6f369769493e5d9023cf3"><div class="ttname"><a href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#a0f0d684424e6f369769493e5d9023cf3">Reina.Cryptography.KeyManagement.AzureKVKeyManager._secretClient</a></div><div class="ttdeci">readonly SecretClient _secretClient</div><div class="ttdef"><b>Definition</b> <a href="_azure_k_v_key_manager_8cs_source.html#l00019">AzureKVKeyManager.cs:19</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00018">Reina.Cryptography.KeyManagement.AzureKVKeyManager._secretClient</a>.</p>
+<p class="reference">References <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00019">Reina.Cryptography.KeyManagement.AzureKVKeyManager._secretClient</a>.</p>
 
 </div>
 </div>
@@ -232,15 +232,15 @@ Static Private Attributes</h2></td></tr>
 <p>Generates a new 256-bit cryptographic key. </p>
 <dl class="section return"><dt>Returns</dt><dd>A byte array containing the generated key.</dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00109">109</a> of file <a class="el" href="_azure_k_v_key_manager_8cs_source.html">AzureKVKeyManager.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  110</span>        {</div>
-<div class="line"><span class="lineno">  111</span>            <span class="keyword">using </span>var aesAlg = Aes.Create();</div>
-<div class="line"><span class="lineno">  112</span>            aesAlg.KeySize = 256;</div>
-<div class="line"><span class="lineno">  113</span>            aesAlg.GenerateKey();</div>
-<div class="line"><span class="lineno">  114</span>            <span class="keywordflow">return</span> aesAlg.Key;</div>
-<div class="line"><span class="lineno">  115</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00153">153</a> of file <a class="el" href="_azure_k_v_key_manager_8cs_source.html">AzureKVKeyManager.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  154</span>        {</div>
+<div class="line"><span class="lineno">  155</span>            <span class="keyword">using </span>var aesAlg = Aes.Create();</div>
+<div class="line"><span class="lineno">  156</span>            aesAlg.KeySize = 256;</div>
+<div class="line"><span class="lineno">  157</span>            aesAlg.GenerateKey();</div>
+<div class="line"><span class="lineno">  158</span>            <span class="keywordflow">return</span> aesAlg.Key;</div>
+<div class="line"><span class="lineno">  159</span>        }</div>
 </div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00059">Reina.Cryptography.KeyManagement.AzureKVKeyManager.GetEncryptionKeyAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00060">Reina.Cryptography.KeyManagement.AzureKVKeyManager.GetEncryptionKeyAsync()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -291,55 +291,100 @@ Here is the caller graph for this function:</div>
 
 <p>Implements <a class="el" href="interface_reina_1_1_cryptography_1_1_interfaces_1_1_i_key_manager.html#a5e9ab1843897162752920da2ab7778c7">Reina.Cryptography.Interfaces.IKeyManager</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00059">59</a> of file <a class="el" href="_azure_k_v_key_manager_8cs_source.html">AzureKVKeyManager.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   60</span>        {</div>
-<div class="line"><span class="lineno">   61</span>            <span class="comment">// Attempt to retrieve the key from cache.</span></div>
-<div class="line"><span class="lineno">   62</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#aea9ba4e47b0fd2657081a1bc4767f73d">_keyCache</a>.TryGetValue(keyName, out var cachedKey))</div>
-<div class="line"><span class="lineno">   63</span>            {</div>
+<p class="definition">Definition at line <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00060">60</a> of file <a class="el" href="_azure_k_v_key_manager_8cs_source.html">AzureKVKeyManager.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   61</span>        {</div>
+<div class="line"><span class="lineno">   62</span>            <span class="comment">// Attempt to retrieve the key from cache.</span></div>
+<div class="line"><span class="lineno">   63</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#aea9ba4e47b0fd2657081a1bc4767f73d">_keyCache</a>.TryGetValue(keyName, out var cachedKey))</div>
 <div class="line"><span class="lineno">   64</span>                <span class="keywordflow">return</span> cachedKey;</div>
-<div class="line"><span class="lineno">   65</span>            }</div>
-<div class="line"><span class="lineno">   66</span> </div>
-<div class="line"><span class="lineno">   67</span>            <span class="keywordflow">try</span></div>
-<div class="line"><span class="lineno">   68</span>            {</div>
-<div class="line"><span class="lineno">   69</span>                <span class="comment">// Retrieve the key from Azure Key Vault.</span></div>
-<div class="line"><span class="lineno">   70</span>                KeyVaultSecret secret = await <a class="code hl_variable" href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#a0f0d684424e6f369769493e5d9023cf3">_secretClient</a>.GetSecretAsync(keyName);</div>
-<div class="line"><span class="lineno">   71</span>                var key = Convert.FromBase64String(secret.Value);</div>
-<div class="line"><span class="lineno">   72</span>                <a class="code hl_variable" href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#aea9ba4e47b0fd2657081a1bc4767f73d">_keyCache</a>[keyName] = key;</div>
-<div class="line"><span class="lineno">   73</span>                <span class="keywordflow">return</span> key;</div>
-<div class="line"><span class="lineno">   74</span>            }</div>
-<div class="line"><span class="lineno">   75</span>            <span class="keywordflow">catch</span> (Azure.RequestFailedException ex) when (ex.Status == 404)</div>
-<div class="line"><span class="lineno">   76</span>            {</div>
-<div class="line"><span class="lineno">   77</span>                <span class="comment">// If the key is not found, generate a new one, store it, and return it.</span></div>
-<div class="line"><span class="lineno">   78</span>                <span class="keywordtype">byte</span>[] newKey = <a class="code hl_function" href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#aa6d24f34039e3f3a396f2d00c5beeaaa">Generate256bitKey</a>();</div>
-<div class="line"><span class="lineno">   79</span>                await <a class="code hl_variable" href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#a0f0d684424e6f369769493e5d9023cf3">_secretClient</a>.SetSecretAsync(keyName, Convert.ToBase64String(newKey));</div>
-<div class="line"><span class="lineno">   80</span>                <a class="code hl_variable" href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#aea9ba4e47b0fd2657081a1bc4767f73d">_keyCache</a>[keyName] = newKey;</div>
-<div class="line"><span class="lineno">   81</span>                <span class="keywordflow">return</span> newKey;</div>
-<div class="line"><span class="lineno">   82</span>            }</div>
-<div class="line"><span class="lineno">   83</span>            <span class="keywordflow">catch</span> (Azure.RequestFailedException ex) when (ex.Status == 401)</div>
-<div class="line"><span class="lineno">   84</span>            {</div>
-<div class="line"><span class="lineno">   85</span>                <span class="comment">// Handles authentication failures.</span></div>
-<div class="line"><span class="lineno">   86</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> UnauthorizedAccessException(<span class="stringliteral">&quot;Failed to authenticate with Azure Key Vault. Please check your credentials.&quot;</span>, ex);</div>
-<div class="line"><span class="lineno">   87</span>            }</div>
-<div class="line"><span class="lineno">   88</span>            <span class="keywordflow">catch</span> (Azure.RequestFailedException ex) when (ex.Status == 403)</div>
-<div class="line"><span class="lineno">   89</span>            {</div>
-<div class="line"><span class="lineno">   90</span>                <span class="comment">// Handles authorization failures.</span></div>
-<div class="line"><span class="lineno">   91</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> UnauthorizedAccessException(<span class="stringliteral">&quot;Access denied. The application does not have the necessary permissions to access the Azure Key Vault secret.&quot;</span>, ex);</div>
-<div class="line"><span class="lineno">   92</span>            }</div>
-<div class="line"><span class="lineno">   93</span>            <span class="keywordflow">catch</span> (Azure.RequestFailedException ex)</div>
-<div class="line"><span class="lineno">   94</span>            {</div>
-<div class="line"><span class="lineno">   95</span>                <span class="comment">// Handles general Azure Key Vault access errors.</span></div>
-<div class="line"><span class="lineno">   96</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception($<span class="stringliteral">&quot;An error occurred while accessing Azure Key Vault: {ex.Message}&quot;</span>, ex);</div>
-<div class="line"><span class="lineno">   97</span>            }</div>
-<div class="line"><span class="lineno">   98</span>            <span class="keywordflow">catch</span> (Exception ex)</div>
-<div class="line"><span class="lineno">   99</span>            {</div>
-<div class="line"><span class="lineno">  100</span>                <span class="comment">// Handles all other exceptions.</span></div>
-<div class="line"><span class="lineno">  101</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception($<span class="stringliteral">&quot;An unexpected error occurred: {ex.Message}&quot;</span>, ex);</div>
-<div class="line"><span class="lineno">  102</span>            }</div>
-<div class="line"><span class="lineno">  103</span>        }</div>
-<div class="ttc" id="aclass_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager_html_aa6d24f34039e3f3a396f2d00c5beeaaa"><div class="ttname"><a href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#aa6d24f34039e3f3a396f2d00c5beeaaa">Reina.Cryptography.KeyManagement.AzureKVKeyManager.Generate256bitKey</a></div><div class="ttdeci">byte[] Generate256bitKey()</div><div class="ttdoc">Generates a new 256-bit cryptographic key.</div><div class="ttdef"><b>Definition</b> <a href="_azure_k_v_key_manager_8cs_source.html#l00109">AzureKVKeyManager.cs:109</a></div></div>
-<div class="ttc" id="aclass_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager_html_aea9ba4e47b0fd2657081a1bc4767f73d"><div class="ttname"><a href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#aea9ba4e47b0fd2657081a1bc4767f73d">Reina.Cryptography.KeyManagement.AzureKVKeyManager._keyCache</a></div><div class="ttdeci">static readonly ConcurrentDictionary&lt; string, byte[]&gt; _keyCache</div><div class="ttdef"><b>Definition</b> <a href="_azure_k_v_key_manager_8cs_source.html#l00019">AzureKVKeyManager.cs:19</a></div></div>
+<div class="line"><span class="lineno">   65</span> </div>
+<div class="line"><span class="lineno">   66</span>            var cfg = <a class="code hl_class" href="class_reina_1_1_cryptography_1_1_configuration_1_1_config.html">Config</a>.<a class="code hl_property" href="class_reina_1_1_cryptography_1_1_configuration_1_1_config.html#ad172cb33a6967cf148ed21bd2e6383ea">Instance</a>;</div>
+<div class="line"><span class="lineno">   67</span>            var versionPattern = <span class="keyword">new</span> Regex($<span class="stringliteral">&quot;^{Regex.Escape(keyName)}--v(\\d+)$&quot;</span>, RegexOptions.Compiled);</div>
+<div class="line"><span class="lineno">   68</span>            var versions = <span class="keyword">new</span> List&lt;(int Version, SecretProperties Props)&gt;();</div>
+<div class="line"><span class="lineno">   69</span> </div>
+<div class="line"><span class="lineno">   70</span>            <span class="keywordflow">try</span></div>
+<div class="line"><span class="lineno">   71</span>            {</div>
+<div class="line"><span class="lineno">   72</span>                await <span class="keywordflow">foreach</span> (var prop <span class="keywordflow">in</span> <a class="code hl_variable" href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#a0f0d684424e6f369769493e5d9023cf3">_secretClient</a>.GetPropertiesOfSecretsAsync())</div>
+<div class="line"><span class="lineno">   73</span>                {</div>
+<div class="line"><span class="lineno">   74</span>                    var match = versionPattern.Match(prop.Name);</div>
+<div class="line"><span class="lineno">   75</span>                    <span class="keywordflow">if</span> (match.Success &amp;&amp; <span class="keywordtype">int</span>.TryParse(match.Groups[1].Value, out <span class="keywordtype">int</span> version))</div>
+<div class="line"><span class="lineno">   76</span>                    {</div>
+<div class="line"><span class="lineno">   77</span>                        versions.Add((version, prop));</div>
+<div class="line"><span class="lineno">   78</span>                    }</div>
+<div class="line"><span class="lineno">   79</span>                }</div>
+<div class="line"><span class="lineno">   80</span> </div>
+<div class="line"><span class="lineno">   81</span>                <span class="keywordtype">string</span> resolvedKeyName;</div>
+<div class="line"><span class="lineno">   82</span>                <span class="keywordtype">byte</span>[] resolvedKey;</div>
+<div class="line"><span class="lineno">   83</span> </div>
+<div class="line"><span class="lineno">   84</span>                <span class="keywordflow">if</span> (versions.Count == 0)</div>
+<div class="line"><span class="lineno">   85</span>                {</div>
+<div class="line"><span class="lineno">   86</span>                    resolvedKeyName = $<span class="stringliteral">&quot;{keyName}--v1&quot;</span>;</div>
+<div class="line"><span class="lineno">   87</span>                    resolvedKey = <a class="code hl_function" href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#aa6d24f34039e3f3a396f2d00c5beeaaa">Generate256bitKey</a>();</div>
+<div class="line"><span class="lineno">   88</span>                    await <a class="code hl_variable" href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#a0f0d684424e6f369769493e5d9023cf3">_secretClient</a>.SetSecretAsync(resolvedKeyName, Convert.ToBase64String(resolvedKey));</div>
+<div class="line"><span class="lineno">   89</span>                }</div>
+<div class="line"><span class="lineno">   90</span>                <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">   91</span>                {</div>
+<div class="line"><span class="lineno">   92</span>                    var sorted = versions.OrderByDescending(x =&gt; x.Version).ToList();</div>
+<div class="line"><span class="lineno">   93</span>                    var (latestVersion, latestProp) = sorted.First();</div>
+<div class="line"><span class="lineno">   94</span>                    var created = latestProp.CreatedOn ?? DateTimeOffset.UtcNow;</div>
+<div class="line"><span class="lineno">   95</span> </div>
+<div class="line"><span class="lineno">   96</span>                    <span class="keywordflow">if</span> (created.Add(cfg.KeyRotationThreshold) &lt;= DateTimeOffset.UtcNow)</div>
+<div class="line"><span class="lineno">   97</span>                    {</div>
+<div class="line"><span class="lineno">   98</span>                        <span class="comment">// Rotate</span></div>
+<div class="line"><span class="lineno">   99</span>                        <span class="keywordtype">int</span> newVersion = latestVersion + 1;</div>
+<div class="line"><span class="lineno">  100</span>                        resolvedKeyName = $<span class="stringliteral">&quot;{keyName}--v{newVersion}&quot;</span>;</div>
+<div class="line"><span class="lineno">  101</span>                        resolvedKey = <a class="code hl_function" href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#aa6d24f34039e3f3a396f2d00c5beeaaa">Generate256bitKey</a>();</div>
+<div class="line"><span class="lineno">  102</span>                        await <a class="code hl_variable" href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#a0f0d684424e6f369769493e5d9023cf3">_secretClient</a>.SetSecretAsync(resolvedKeyName, Convert.ToBase64String(resolvedKey));</div>
+<div class="line"><span class="lineno">  103</span>                    }</div>
+<div class="line"><span class="lineno">  104</span>                    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  105</span>                    {</div>
+<div class="line"><span class="lineno">  106</span>                        <span class="comment">// Use existing latest</span></div>
+<div class="line"><span class="lineno">  107</span>                        resolvedKeyName = latestProp.Name;</div>
+<div class="line"><span class="lineno">  108</span>                        KeyVaultSecret secret = (await <a class="code hl_variable" href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#a0f0d684424e6f369769493e5d9023cf3">_secretClient</a>.GetSecretAsync(resolvedKeyName)).Value;</div>
+<div class="line"><span class="lineno">  109</span>                        resolvedKey = Convert.FromBase64String(secret.Value);</div>
+<div class="line"><span class="lineno">  110</span>                    }</div>
+<div class="line"><span class="lineno">  111</span> </div>
+<div class="line"><span class="lineno">  112</span>                    <span class="comment">// Cleanup old versions</span></div>
+<div class="line"><span class="lineno">  113</span>                    var cutoff = DateTimeOffset.UtcNow.Subtract(cfg.KeyRetentionPeriod);</div>
+<div class="line"><span class="lineno">  114</span>                    <span class="keywordflow">foreach</span> (var (v, prop) in sorted)</div>
+<div class="line"><span class="lineno">  115</span>                    {</div>
+<div class="line"><span class="lineno">  116</span>                        <span class="keywordflow">if</span> ((prop.CreatedOn ?? DateTimeOffset.UtcNow) &lt; cutoff)</div>
+<div class="line"><span class="lineno">  117</span>                        {</div>
+<div class="line"><span class="lineno">  118</span>                            <span class="keywordflow">try</span> { await <a class="code hl_variable" href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#a0f0d684424e6f369769493e5d9023cf3">_secretClient</a>.StartDeleteSecretAsync(prop.Name); } </div>
+<div class="line"><span class="lineno">  119</span>                            <span class="keywordflow">catch</span> { <span class="comment">/* Ignore errors during deletion */</span>}</div>
+<div class="line"><span class="lineno">  120</span>                        }</div>
+<div class="line"><span class="lineno">  121</span>                    }</div>
+<div class="line"><span class="lineno">  122</span>                }</div>
+<div class="line"><span class="lineno">  123</span> </div>
+<div class="line"><span class="lineno">  124</span>                <a class="code hl_variable" href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#aea9ba4e47b0fd2657081a1bc4767f73d">_keyCache</a>[keyName] = resolvedKey;</div>
+<div class="line"><span class="lineno">  125</span>                <span class="keywordflow">return</span> resolvedKey;</div>
+<div class="line"><span class="lineno">  126</span>            }</div>
+<div class="line"><span class="lineno">  127</span>            <span class="keywordflow">catch</span> (Azure.RequestFailedException ex) when (ex.Status == 401)</div>
+<div class="line"><span class="lineno">  128</span>            {</div>
+<div class="line"><span class="lineno">  129</span>                <span class="comment">// Handles authentication failures.</span></div>
+<div class="line"><span class="lineno">  130</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> UnauthorizedAccessException(<span class="stringliteral">&quot;Failed to authenticate with Azure Key Vault. Please check your credentials.&quot;</span>, ex);</div>
+<div class="line"><span class="lineno">  131</span>            }</div>
+<div class="line"><span class="lineno">  132</span>            <span class="keywordflow">catch</span> (Azure.RequestFailedException ex) when (ex.Status == 403)</div>
+<div class="line"><span class="lineno">  133</span>            {</div>
+<div class="line"><span class="lineno">  134</span>                <span class="comment">// Handles authorization failures.</span></div>
+<div class="line"><span class="lineno">  135</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> UnauthorizedAccessException(<span class="stringliteral">&quot;Access denied. The application does not have the necessary permissions to access the Azure Key Vault secret.&quot;</span>, ex);</div>
+<div class="line"><span class="lineno">  136</span>            }</div>
+<div class="line"><span class="lineno">  137</span>            <span class="keywordflow">catch</span> (Azure.RequestFailedException ex)</div>
+<div class="line"><span class="lineno">  138</span>            {</div>
+<div class="line"><span class="lineno">  139</span>                <span class="comment">// Handles general Azure Key Vault access errors.</span></div>
+<div class="line"><span class="lineno">  140</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception($<span class="stringliteral">&quot;An error occurred while accessing Azure Key Vault: {ex.Message}&quot;</span>, ex);</div>
+<div class="line"><span class="lineno">  141</span>            }</div>
+<div class="line"><span class="lineno">  142</span>            <span class="keywordflow">catch</span> (Exception ex)</div>
+<div class="line"><span class="lineno">  143</span>            {</div>
+<div class="line"><span class="lineno">  144</span>                <span class="comment">// Handles all other exceptions.</span></div>
+<div class="line"><span class="lineno">  145</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception($<span class="stringliteral">&quot;An unexpected error occurred: {ex.Message}&quot;</span>, ex);</div>
+<div class="line"><span class="lineno">  146</span>            }</div>
+<div class="line"><span class="lineno">  147</span>        }</div>
+<div class="ttc" id="aclass_reina_1_1_cryptography_1_1_configuration_1_1_config_html"><div class="ttname"><a href="class_reina_1_1_cryptography_1_1_configuration_1_1_config.html">Reina.Cryptography.Configuration.Config</a></div><div class="ttdoc">Represents the configuration settings for accessing Azure Key Vault. This class follows the Singleton...</div><div class="ttdef"><b>Definition</b> <a href="_config_8cs_source.html#l00010">Config.cs:11</a></div></div>
+<div class="ttc" id="aclass_reina_1_1_cryptography_1_1_configuration_1_1_config_html_ad172cb33a6967cf148ed21bd2e6383ea"><div class="ttname"><a href="class_reina_1_1_cryptography_1_1_configuration_1_1_config.html#ad172cb33a6967cf148ed21bd2e6383ea">Reina.Cryptography.Configuration.Config.Instance</a></div><div class="ttdeci">static Config Instance</div><div class="ttdoc">Provides global access to the singleton instance of the configuration.</div><div class="ttdef"><b>Definition</b> <a href="_config_8cs_source.html#l00025">Config.cs:25</a></div></div>
+<div class="ttc" id="aclass_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager_html_aa6d24f34039e3f3a396f2d00c5beeaaa"><div class="ttname"><a href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#aa6d24f34039e3f3a396f2d00c5beeaaa">Reina.Cryptography.KeyManagement.AzureKVKeyManager.Generate256bitKey</a></div><div class="ttdeci">byte[] Generate256bitKey()</div><div class="ttdoc">Generates a new 256-bit cryptographic key.</div><div class="ttdef"><b>Definition</b> <a href="_azure_k_v_key_manager_8cs_source.html#l00153">AzureKVKeyManager.cs:153</a></div></div>
+<div class="ttc" id="aclass_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager_html_aea9ba4e47b0fd2657081a1bc4767f73d"><div class="ttname"><a href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#aea9ba4e47b0fd2657081a1bc4767f73d">Reina.Cryptography.KeyManagement.AzureKVKeyManager._keyCache</a></div><div class="ttdeci">static readonly ConcurrentDictionary&lt; string, byte[]&gt; _keyCache</div><div class="ttdef"><b>Definition</b> <a href="_azure_k_v_key_manager_8cs_source.html#l00020">AzureKVKeyManager.cs:20</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00019">Reina.Cryptography.KeyManagement.AzureKVKeyManager._keyCache</a>, <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00018">Reina.Cryptography.KeyManagement.AzureKVKeyManager._secretClient</a>, and <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00109">Reina.Cryptography.KeyManagement.AzureKVKeyManager.Generate256bitKey()</a>.</p>
+<p class="reference">References <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00020">Reina.Cryptography.KeyManagement.AzureKVKeyManager._keyCache</a>, <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00019">Reina.Cryptography.KeyManagement.AzureKVKeyManager._secretClient</a>, <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00153">Reina.Cryptography.KeyManagement.AzureKVKeyManager.Generate256bitKey()</a>, and <a class="el" href="_config_8cs_source.html#l00025">Reina.Cryptography.Configuration.Config.Instance</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_library_8cs_source.html#l00085">Reina.Cryptography.Library.Decrypt()</a>, and <a class="el" href="_library_8cs_source.html#l00040">Reina.Cryptography.Library.Encrypt()</a>.</p>
 <div class="dynheader">
@@ -385,9 +430,9 @@ Here is the caller graph for this function:</div>
 <div class="line">                Config.Instance.AzureTenantId</div>
 <div class="line">            );</div>
 <div class="line">        })</div>
-<div class="ttc" id="aclass_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager_html_af5aaf547ee232991879a67abc406a492"><div class="ttname"><a href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#af5aaf547ee232991879a67abc406a492">Reina.Cryptography.KeyManagement.AzureKVKeyManager.AzureKVKeyManager</a></div><div class="ttdeci">AzureKVKeyManager(string vaultUri, string clientId, string clientSecret, string tenantId)</div><div class="ttdoc">Initializes a new instance of the AzureKVKeyManager class.</div><div class="ttdef"><b>Definition</b> <a href="_azure_k_v_key_manager_8cs_source.html#l00045">AzureKVKeyManager.cs:45</a></div></div>
+<div class="ttc" id="aclass_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager_html_af5aaf547ee232991879a67abc406a492"><div class="ttname"><a href="class_reina_1_1_cryptography_1_1_key_management_1_1_azure_k_v_key_manager.html#af5aaf547ee232991879a67abc406a492">Reina.Cryptography.KeyManagement.AzureKVKeyManager.AzureKVKeyManager</a></div><div class="ttdeci">AzureKVKeyManager(string vaultUri, string clientId, string clientSecret, string tenantId)</div><div class="ttdoc">Initializes a new instance of the AzureKVKeyManager class.</div><div class="ttdef"><b>Definition</b> <a href="_azure_k_v_key_manager_8cs_source.html#l00046">AzureKVKeyManager.cs:46</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00022">22</a> of file <a class="el" href="_azure_k_v_key_manager_8cs_source.html">AzureKVKeyManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00023">23</a> of file <a class="el" href="_azure_k_v_key_manager_8cs_source.html">AzureKVKeyManager.cs</a>.</p>
 
 </div>
 </div>
@@ -411,9 +456,9 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00019">19</a> of file <a class="el" href="_azure_k_v_key_manager_8cs_source.html">AzureKVKeyManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00020">20</a> of file <a class="el" href="_azure_k_v_key_manager_8cs_source.html">AzureKVKeyManager.cs</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00059">Reina.Cryptography.KeyManagement.AzureKVKeyManager.GetEncryptionKeyAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00060">Reina.Cryptography.KeyManagement.AzureKVKeyManager.GetEncryptionKeyAsync()</a>.</p>
 
 </div>
 </div>
@@ -437,9 +482,9 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00018">18</a> of file <a class="el" href="_azure_k_v_key_manager_8cs_source.html">AzureKVKeyManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00019">19</a> of file <a class="el" href="_azure_k_v_key_manager_8cs_source.html">AzureKVKeyManager.cs</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00045">Reina.Cryptography.KeyManagement.AzureKVKeyManager.AzureKVKeyManager()</a>, and <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00059">Reina.Cryptography.KeyManagement.AzureKVKeyManager.GetEncryptionKeyAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00046">Reina.Cryptography.KeyManagement.AzureKVKeyManager.AzureKVKeyManager()</a>, and <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00060">Reina.Cryptography.KeyManagement.AzureKVKeyManager.GetEncryptionKeyAsync()</a>.</p>
 
 </div>
 </div>
@@ -466,7 +511,7 @@ Here is the caller graph for this function:</div>
 
 <p>Gets the singleton instance of the AzureKVKeyManager. </p>
 
-<p class="definition">Definition at line <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00036">36</a> of file <a class="el" href="_azure_k_v_key_manager_8cs_source.html">AzureKVKeyManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_azure_k_v_key_manager_8cs_source.html#l00037">37</a> of file <a class="el" href="_azure_k_v_key_manager_8cs_source.html">AzureKVKeyManager.cs</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_library_8cs_source.html#l00085">Reina.Cryptography.Library.Decrypt()</a>, and <a class="el" href="_library_8cs_source.html#l00040">Reina.Cryptography.Library.Encrypt()</a>.</p>
 
@@ -478,7 +523,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 7 2025 10:07:43 for Reina.Cryptography by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+Generated on Sat Jun 28 2025 19:09:37 for Reina.Cryptography by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
 </small></address>
 </body>
 </html>
