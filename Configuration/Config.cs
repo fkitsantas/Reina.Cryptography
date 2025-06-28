@@ -45,6 +45,17 @@ namespace Reina.Cryptography.Configuration
         public string AzureTenantId { get; private set; } = "the-azure-tenant-id";
 
         /// <summary>
+        /// The maximum age for an active key before rotation is needed.
+        /// </summary>
+        public TimeSpan KeyRotationThreshold { get; private set; } = TimeSpan.FromDays(90);
+
+        /// <summary>
+        /// The maximum age of a key version before it's eligible for deletion.
+        /// Defaults to 12 months (365 days).
+        /// </summary>
+        public TimeSpan KeyRetentionPeriod { get; private set; } = TimeSpan.FromDays(365);
+
+        /// <summary>
         /// Allows external configuration values to be set for the Azure Key Vault properties.
         /// If a provided value is null or whitespace, the existing value is retained.
         /// </summary>
@@ -52,13 +63,22 @@ namespace Reina.Cryptography.Configuration
         /// <param name="azureClientId">The client ID for Azure Key Vault authentication to set.</param>
         /// <param name="azureClientSecret">The client secret for Azure Key Vault authentication to set.</param>
         /// <param name="azureTenantId">The tenant ID for Azure Key Vault authentication to set.</param>
-        public void SetConfiguration(string azureKeyVaultUrl, string azureClientId, string azureClientSecret, string azureTenantId)
+        /// <param name="keyRotationThreshold">The maximum age for an active key before rotation is needed. If null, the existing value is retained.</param>
+        /// <param name="keyRetentionPeriod">The maximum age of a key version before it's eligible for deletion. If null, the existing value is retained.</param>
+        public void SetConfiguration(string azureKeyVaultUrl, string azureClientId, string azureClientSecret, string azureTenantId, TimeSpan? keyRotationThreshold = null, TimeSpan? keyRetentionPeriod = null)
         {
             AzureKeyVaultUrl = string.IsNullOrWhiteSpace(azureKeyVaultUrl) ? AzureKeyVaultUrl : azureKeyVaultUrl;
             AzureClientId = string.IsNullOrWhiteSpace(azureClientId) ? AzureClientId : azureClientId;
             AzureClientSecret = string.IsNullOrWhiteSpace(azureClientSecret) ? AzureClientSecret : azureClientSecret;
             AzureTenantId = string.IsNullOrWhiteSpace(azureTenantId) ? AzureTenantId : azureTenantId;
+
+            if (keyRotationThreshold.HasValue)
+                KeyRotationThreshold = keyRotationThreshold.Value;
+
+            if (keyRetentionPeriod.HasValue)
+                KeyRetentionPeriod = keyRetentionPeriod.Value;
         }
+
 
         /// <summary>
         /// Validates the configuration settings for Azure Key Vault access.

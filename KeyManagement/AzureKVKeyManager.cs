@@ -1,10 +1,11 @@
-﻿using Reina.Cryptography.Interfaces;
-using Reina.Cryptography.Configuration;
-using Azure.Identity;
+﻿using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
+using Reina.Cryptography.Configuration;
+using Reina.Cryptography.Interfaces;
 using System;
-using System.Security.Cryptography;
 using System.Collections.Concurrent;
+using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Reina.Cryptography.KeyManagement
@@ -60,25 +61,68 @@ namespace Reina.Cryptography.KeyManagement
         {
             // Attempt to retrieve the key from cache.
             if (_keyCache.TryGetValue(keyName, out var cachedKey))
-            {
                 return cachedKey;
-            }
+
+            var cfg = Config.Instance;
+            var versionPattern = new Regex($"^{Regex.Escape(keyName)}--v(\\d+)$", RegexOptions.Compiled);
+            var versions = new List<(int Version, SecretProperties Props)>();
 
             try
             {
-                // Retrieve the key from Azure Key Vault.
-                KeyVaultSecret secret = await _secretClient.GetSecretAsync(keyName);
-                var key = Convert.FromBase64String(secret.Value);
-                _keyCache[keyName] = key;
-                return key;
-            }
-            catch (Azure.RequestFailedException ex) when (ex.Status == 404)
-            {
-                // If the key is not found, generate a new one, store it, and return it.
-                byte[] newKey = Generate256bitKey();
-                await _secretClient.SetSecretAsync(keyName, Convert.ToBase64String(newKey));
-                _keyCache[keyName] = newKey;
-                return newKey;
+                await foreach (var prop in _secretClient.GetPropertiesOfSecretsAsync())
+                {
+                    var match = versionPattern.Match(prop.Name);
+                    if (match.Success && int.TryParse(match.Groups[1].Value, out int version))
+                    {
+                        versions.Add((version, prop));
+                    }
+                }
+
+                string resolvedKeyName;
+                byte[] resolvedKey;
+
+                if (versions.Count == 0)
+                {
+                    resolvedKeyName = $"{keyName}--v1";
+                    resolvedKey = Generate256bitKey();
+                    await _secretClient.SetSecretAsync(resolvedKeyName, Convert.ToBase64String(resolvedKey));
+                }
+                else
+                {
+                    var sorted = versions.OrderByDescending(x => x.Version).ToList();
+                    var (latestVersion, latestProp) = sorted.First();
+                    var created = latestProp.CreatedOn ?? DateTimeOffset.UtcNow;
+
+                    if (created.Add(cfg.KeyRotationThreshold) <= DateTimeOffset.UtcNow)
+                    {
+                        // Rotate
+                        int newVersion = latestVersion + 1;
+                        resolvedKeyName = $"{keyName}--v{newVersion}";
+                        resolvedKey = Generate256bitKey();
+                        await _secretClient.SetSecretAsync(resolvedKeyName, Convert.ToBase64String(resolvedKey));
+                    }
+                    else
+                    {
+                        // Use existing latest
+                        resolvedKeyName = latestProp.Name;
+                        KeyVaultSecret secret = (await _secretClient.GetSecretAsync(resolvedKeyName)).Value;
+                        resolvedKey = Convert.FromBase64String(secret.Value);
+                    }
+
+                    // Cleanup old versions
+                    var cutoff = DateTimeOffset.UtcNow.Subtract(cfg.KeyRetentionPeriod);
+                    foreach (var (v, prop) in sorted)
+                    {
+                        if ((prop.CreatedOn ?? DateTimeOffset.UtcNow) < cutoff)
+                        {
+                            try { await _secretClient.StartDeleteSecretAsync(prop.Name); } 
+                            catch { /* Ignore errors during deletion */}
+                        }
+                    }
+                }
+
+                _keyCache[keyName] = resolvedKey;
+                return resolvedKey;
             }
             catch (Azure.RequestFailedException ex) when (ex.Status == 401)
             {
