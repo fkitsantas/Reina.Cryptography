@@ -7,7 +7,7 @@ namespace Reina.Cryptography.KeyManagement
 {
     /// <summary>
     /// Provides a centralized access point to the appropriate IKeyManager implementation 
-    /// based on the configured key management provider (Azure, AWS, Google).
+    /// based on the configured key management provider (Azure, AWS, GoogleCloud).
     /// </summary>
     internal static class KeyFactory
     {

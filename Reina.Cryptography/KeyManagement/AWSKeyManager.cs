@@ -18,11 +18,10 @@ namespace Reina.Cryptography.KeyManagement
         private static readonly ConcurrentDictionary<string, byte[]> _keyCache = new();
 
         // Lazy singleton to ensure a single instance is asynchronously initialized
-        private static readonly Lazy<Task<AWSKeyManager>> _instance = new(new Func<Task<AWSKeyManager>>(() =>
+        private static readonly Lazy<Task<AWSKeyManager>> _instance =  new(new Func<Task<AWSKeyManager>>(async () =>
         {
             var cfg = Config.Instance;
             cfg.ValidateConfiguration();
-
             if (string.IsNullOrWhiteSpace(cfg.AWSRegion))
                 throw new InvalidOperationException("AWS Region is required.");
 
@@ -31,14 +30,15 @@ namespace Reina.Cryptography.KeyManagement
                 RegionEndpoint = RegionEndpoint.GetBySystemName(cfg.AWSRegion!)
             };
 
-            var client = (cfg.AWSAccessKeyId != null && cfg.AWSSecretAccessKey != null)
-                ? new AmazonSecretsManagerClient(cfg.AWSAccessKeyId, cfg.AWSSecretAccessKey, config)
-                : new AmazonSecretsManagerClient(config);
+            var client = await Task.Run(() =>
+                (cfg.AWSAccessKeyId != null && cfg.AWSSecretAccessKey != null)
+                    ? new AmazonSecretsManagerClient(cfg.AWSAccessKeyId, cfg.AWSSecretAccessKey, config)
+                    : new AmazonSecretsManagerClient(config)
+            ).ConfigureAwait(false);
 
-            return Task.FromResult(new AWSKeyManager(client));
+            return new AWSKeyManager(client);
         }));
-
-
+        
         /// <summary>
         /// Provides the singleton instance of the AWSKeyManager asynchronously.
         /// </summary>
