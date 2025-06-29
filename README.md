@@ -1,4 +1,4 @@
-![Reina Cryptography Library](/Resources/Reina-Cryptography-Preview.jpg)
+![Reina Cryptography Library](/Reina.Cryptography/Resources/Reina-Cryptography-Preview.jpg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/) &nbsp; [![Build and Release](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/build-and-release.yml/badge.svg)](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/build-and-release.yml) &nbsp; [![Generate and Deploy Documentation](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/generate-and-deploy-documentation.yml/badge.svg)](https://github.com/fkitsantas/Reina.Cryptography/actions/workflows/generate-and-deploy-documentation.yml)
 
 ## Project Overview
