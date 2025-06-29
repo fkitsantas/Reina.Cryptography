@@ -119,7 +119,9 @@ Reina Cryptography integrates with external libraries to provide its advanced fe
    - The process starts when the `Encrypt` method in `Library.cs` is called. This method serves as the gateway to initiate the encryption process.
 
 2. **Key Retrieval Process:**
-   - The method interacts with `AzureKVKeyManager.cs` to retrieve the necessary encryption keys.
+   - The method interacts with `
+   - 
+   - .cs` to retrieve the necessary encryption keys.
    - Depending on user input, either a single key or three different keys are fetched. If one key name is provided, the same key is used across all encryption layers. If three key names are provided, each key is used for a specific algorithm – the first for Twofish, the second for Serpent, and the third for AES.
 
 3. **Encryption in Layers with Unique IVs:**
@@ -147,7 +149,7 @@ Reina Cryptography integrates with external libraries to provide its advanced fe
    - The decryption process begins with the `Decrypt` method in `Library.cs`. This method is responsible for reversing the encryption process.
 
 2. **Key Retrieval Process:**
-   - Similar to encryption, the `Decrypt` method retrieves keys from `AzureKVKeyManager.cs`.
+   - Similar to encryption, the `Decrypt` method retrieves keys from `AzureKeyManager.cs`.
    - If one key name was used for encryption, the same key is fetched for all decryption layers. If three different key names were used, each corresponding key is fetched for its specific decryption algorithm.
 
 3. **Layered Decryption with Unique IVs:**
@@ -323,7 +325,7 @@ The library is organized into the following modules:
   
 - **Interfaces Module**: Defines the interfaces for configuration, encryption, decryption, and key management.
 
-- **Key Management Module**: Contains the `AzureKVKeyManager` class, which integrates with Azure Key Vault for key management.
+- **Key Management Module**: Contains the `AzureKeyManager` class, which integrates with Azure Key Vault for key management.
 
 Each module in Reina.Cryptography is designed to work independently yet cohesively, contributing to the library's overall effectiveness and efficiency. This structured approach not only simplifies maintenance and upgrades but also enhances the library's usability across various application scenarios.
 <a href="#table-of-contents" title="Back to Top"><img align="right" src="Resources/backtotop.png" alt="Back to Top" width="35" height="35"></a>

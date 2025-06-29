@@ -1,11 +1,9 @@
-﻿using System.Threading.Tasks;
-
-namespace Reina.Cryptography.Interfaces
+﻿namespace Reina.Cryptography.Interfaces
 {
     /// <summary>
     /// Defines the contract for the DataEncryptor class that implements data encryption.
     /// </summary>
-    internal interface IEncryptor
+    public interface IEncryptor
     {
         /// <summary>
         /// Encrypts the specified data.

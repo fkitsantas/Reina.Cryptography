@@ -1,11 +1,9 @@
-﻿using System.Threading.Tasks;
-
-namespace Reina.Cryptography.Interfaces
+﻿namespace Reina.Cryptography.Interfaces
 {
     /// <summary>
     /// Defines the contract for the DataDecryptor class that implements data decryption.
     /// </summary>
-    internal interface IDecryptor
+    public interface IDecryptor
     {
         /// <summary>
         /// Decrypts the specified data.

@@ -15,36 +15,38 @@ namespace Reina.Cryptography.KeyManagement
     /// Manages 256-bit cryptographic keys by interfacing with Azure Key Vault, providing secure storage and retrieval of keys.
     /// This class implements a caching mechanism to optimize key retrieval performance by reducing the number of round trips to the key vault.
     /// </summary>
-    internal class AzureKVKeyManager : IKeyManager
+    internal class AzureKeyManager : IKeyManager
     {
         private readonly SecretClient _secretClient;
         private static readonly ConcurrentDictionary<string, byte[]> _keyCache = new();
 
-        // Lazy initialization of the AzureKVKeyManager singleton instance.
-        private static readonly Lazy<AzureKVKeyManager> _instance = new(() =>
+        private static readonly Lazy<Task<AzureKeyManager>> _instance = new(async () =>
         {
-            Config.Instance.ValidateConfiguration(); // Validate Azure KV Configuration
-            return new AzureKVKeyManager(
-                Config.Instance.AzureKeyVaultUrl,
-                Config.Instance.AzureClientId,
-                Config.Instance.AzureClientSecret,
-                Config.Instance.AzureTenantId
-            );
+            var cfg = Config.Instance;
+            cfg.ValidateConfiguration();
+
+            var vaultUri = cfg.AzureKeyVaultUrl ?? throw new InvalidOperationException("AzureKeyVaultUrl is required");
+            var clientId = cfg.AzureClientId ?? throw new InvalidOperationException("AzureClientId is required");
+            var clientSecret = cfg.AzureClientSecret ?? throw new InvalidOperationException("AzureClientSecret is required");
+            var tenantId = cfg.AzureTenantId ?? throw new InvalidOperationException("AzureTenantId is required");
+
+            var manager = new AzureKeyManager(vaultUri, clientId, clientSecret, tenantId);
+            return await Task.FromResult(manager); // Ready for more complex async init if needed
         });
 
         /// <summary>
-        /// Gets the singleton instance of the AzureKVKeyManager.
+        /// Gets the singleton instance of the AzureKeyManager asynchronously.
         /// </summary>
-        public static AzureKVKeyManager Instance => _instance.Value;
+        public static Task<AzureKeyManager> InstanceAsync() => _instance.Value;
 
         /// <summary>
-        /// Initializes a new instance of the AzureKVKeyManager class.
+        /// Initializes a new instance of the AzureKeyManager class.
         /// </summary>
         /// <param name="vaultUri">The URI of the Azure Key Vault.</param>
         /// <param name="clientId">The client ID for Azure Active Directory authentication.</param>
         /// <param name="clientSecret">The client secret for Azure Active Directory authentication.</param>
         /// <param name="tenantId">The tenant ID for Azure Active Directory authentication.</param>
-        public AzureKVKeyManager(string vaultUri, string clientId, string clientSecret, string tenantId)
+        private AzureKeyManager(string vaultUri, string clientId, string clientSecret, string tenantId)
         {
             var clientOptions = new SecretClientOptions
             {
@@ -259,12 +261,14 @@ namespace Reina.Cryptography.KeyManagement
         /// Generates a new 256-bit cryptographic key.
         /// </summary>
         /// <returns>A byte array containing the generated key.</returns>
-        private byte[] Generate256bitKey()
+        private static byte[] Generate256bitKey()
         {
-            using var aesAlg = Aes.Create();
-            aesAlg.KeySize = 256;
-            aesAlg.GenerateKey();
-            return aesAlg.Key;
+            var key = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(key);
+            }
+            return key;
         }
     }
 }
