@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Weavers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FodyWeavers.xsd">
-	<Costura LoadAtModuleInit="true">
+<Weavers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="FodyWeavers.xsd">
+	<Costura LoadAtModuleInit="true"
+			 IncludeRuntimeReferences="false"
+			 Log="true">
 		<IncludeAssemblies>
 			Azure.Identity
 			Azure.Security.KeyVault.Keys
@@ -18,15 +21,10 @@
 			Google.Cloud.Location
 			Google.Cloud.SecretManager.V1
 			Google.Protobuf
-			grpc_csharp_ext.x64
-			grpc_csharp_ext.x86
 			Grpc.Auth
 			Grpc.Core.Api
-			Grpc.Core
 			Grpc.Net.Client
 			Grpc.Net.Common
-			libgrpc_csharp_ext.x64.dylib
-			libgrpc_csharp_ext.x64.so
 			Microsoft.Extensions.Configuration.Binder
 			Microsoft.Extensions.Configuration.FileExtensions
 			Microsoft.Extensions.Configuration.Json
@@ -64,7 +62,6 @@
 			System.ValueTuple
 			System.Formats.Asn1
 			System.IO.Pipelines
-			System.Net.Http.WinHttpHandler
 		</IncludeAssemblies>
 	</Costura>
 </Weavers>
