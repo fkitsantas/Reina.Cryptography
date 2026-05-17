@@ -106,15 +106,43 @@ jobs:
         run: |
           New-Item -ItemType Directory -Force -Path release-artifacts | Out-Null
 
-          Copy-Item `
-            "Reina.Cryptography/bin/Release/net481/Reina.Cryptography.dll" `
-            "release-artifacts/Reina.Cryptography.net481.dll"
+          Write-Host "Searching for build outputs..."
+          Get-ChildItem -Path "Reina.Cryptography/bin/Release" -Recurse -File
+
+          $net481Dll = Get-ChildItem `
+            -Path "Reina.Cryptography/bin/Release/net481" `
+            -Filter "Reina.Cryptography.dll" `
+            -File `
+            -ErrorAction Stop |
+            Select-Object -First 1
+
+          $net10Dll = Get-ChildItem `
+            -Path "Reina.Cryptography/bin/Release/net10.0" `
+            -Filter "Reina.Cryptography.dll" `
+            -File `
+            -ErrorAction Stop |
+            Select-Object -First 1
+
+          if (-not $net481Dll) {
+            Write-Error ".NET Framework 4.8.1 DLL was not found."
+            exit 1
+          }
+
+          if (-not $net10Dll) {
+            Write-Error ".NET 10 DLL was not found."
+            exit 1
+          }
 
           Copy-Item `
-            "Reina.Cryptography/bin/Release/net10.0/Reina.Cryptography.dll" `
-            "release-artifacts/Reina.Cryptography.net10.0.dll"
+            -LiteralPath $net481Dll.FullName `
+            -Destination "release-artifacts/Reina.Cryptography.net481.dll"
 
-          Get-ChildItem release-artifacts
+          Copy-Item `
+            -LiteralPath $net10Dll.FullName `
+            -Destination "release-artifacts/Reina.Cryptography.net10.0.dll"
+
+          Write-Host "Prepared release artifacts:"
+          Get-ChildItem -Path "release-artifacts" -File
 
       - name: Create GitHub release and upload assets
         shell: pwsh
