@@ -20,6 +20,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="xunit.v3" Version="3.2.2" />
+    <ProjectReference Include="..\Reina.Cryptography\Reina.Cryptography.csproj" />
   </ItemGroup>
 
   <ItemGroup>
