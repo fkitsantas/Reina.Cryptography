@@ -33,13 +33,13 @@ jobs:
         id: version
         run: |
           # Ensure csproj file exists
-          if (!(Test-Path "Reina.Cryptography.csproj")) {
-            Write-Error "Reina.Cryptography.csproj file not found"
+          if (!(Test-Path "Reina.Cryptography/Reina.Cryptography.csproj")) {
+            Write-Error "Reina.Cryptography/Reina.Cryptography.csproj file not found"
             exit 1
           }
 
           # Fetch current version prefix from csproj
-          [xml]$csproj = Get-Content "Reina.Cryptography.csproj"
+          [xml]$csproj = Get-Content "Reina.Cryptography/Reina.Cryptography.csproj"
           $currentVersion = $csproj.Project.PropertyGroup.VersionPrefix
           if ([string]::IsNullOrEmpty($currentVersion)) {
             Write-Error "VersionPrefix not found in Reina.Cryptography.csproj"
@@ -68,7 +68,7 @@ jobs:
       # Update .csproj file
       - name: Update project version
         run: |
-          $csprojPath = "Reina.Cryptography.csproj"
+          $csprojPath = "Reina.Cryptography/Reina.Cryptography.csproj"
           [xml]$csproj = Get-Content $csprojPath
 
           # Check if VersionPrefix exists and update it
