@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - '.github/workflows/**'
-      - 'Resources/**'
-      - 'README.md'
 
 jobs:
   build-and-release:
@@ -95,7 +91,7 @@ jobs:
       # List build output for debugging purposes
       - name: List build output
         run: |
-          dir .\bin\Release\
+          dir Reina.Cryptography\bin\Release\
       
       # Create a release
       - name: Create Release
