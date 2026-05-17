@@ -1,34 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Weavers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FodyWeavers.xsd">
-	<Costura LoadAtModuleInit="true" Log="true">
+	<Costura LoadAtModuleInit="true">
 		<IncludeAssemblies>
 			Azure.Identity
 			Azure.Security.KeyVault.Keys
-		        Azure.Security.KeyVault.Secrets
-		        Azure.Core
-		        Microsoft.Extensions.Configuration
-		        Microsoft.Identity.Client
-		        Microsoft.IdentityModel.Abstractions
-		        System.Memory.Data
-		        System.Text.Json
-		        BouncyCastle.Cryptography
-		        Microsoft.Bcl.AsyncInterfaces
-		        Microsoft.Extensions.Configuration.Abstractions
-		        Microsoft.Extensions.Primitives
-		        Microsoft.Identity.Client.Extensions.Msal
-		        System.Buffers
-		        System.ClientModel
-		        System.Diagnostics.DiagnosticSource
-		        System.IO.FileSystem.AccessControl
-		        System.Memory
-		        System.Numerics.Vectors
-		        System.Runtime.CompilerServices.Unsafe
-		        System.Security.AccessControl
-		        System.Security.Cryptography.ProtectedData
-		        System.Security.Principal.Windows
-		        System.Text.Encodings.Web
-		        System.Threading.Tasks.Extensions
-		        System.ValueTuple
+			Azure.Security.KeyVault.Secrets
+			Azure.Core
+			AWSSDK.Core
+			AWSSDK.SecretsManager
+			Google.Api.CommonProtos
+			Google.Api.Gax
+			Google.Api.Gax.Grpc
+			Google.Apis.Auth
+			Google.Apis.Core
+			Google.Apis
+			Google.Cloud.Iam.V1
+			Google.Cloud.Location
+			Google.Cloud.SecretManager.V1
+			Google.Protobuf
+			grpc_csharp_ext.x64
+			grpc_csharp_ext.x86
+			Grpc.Auth
+			Grpc.Core.Api
+			Grpc.Core
+			Grpc.Net.Client
+			Grpc.Net.Common
+			libgrpc_csharp_ext.x64.dylib
+			libgrpc_csharp_ext.x64.so
+			Microsoft.Extensions.Configuration.Binder
+			Microsoft.Extensions.Configuration.FileExtensions
+			Microsoft.Extensions.Configuration.Json
+			Microsoft.Extensions.DependencyInjection.Abstractions
+			Microsoft.Extensions.Diagnostics.Abstractions
+			Microsoft.Extensions.FileProviders.Abstractions
+			Microsoft.Extensions.FileProviders.Physical
+			Microsoft.Extensions.FileSystemGlobbing
+			Microsoft.Extensions.Hosting.Abstractions
+			Microsoft.Extensions.Logging.Abstractions
+			Microsoft.Extensions.Options
+			Newtonsoft.Json
+			Microsoft.Extensions.Configuration
+			Microsoft.Identity.Client
+			Microsoft.IdentityModel.Abstractions
+			System.Memory.Data
+			System.Text.Json
+			BouncyCastle.Cryptography
+			Microsoft.Bcl.AsyncInterfaces
+			Microsoft.Extensions.Configuration.Abstractions
+			Microsoft.Extensions.Primitives
+			Microsoft.Identity.Client.Extensions.Msal
+			System.Buffers
+			System.ClientModel
+			System.Diagnostics.DiagnosticSource
+			System.IO.FileSystem.AccessControl
+			System.Memory
+			System.Numerics.Vectors
+			System.Runtime.CompilerServices.Unsafe
+			System.Security.AccessControl
+			System.Security.Cryptography.ProtectedData
+			System.Security.Principal.Windows
+			System.Text.Encodings.Web
+			System.Threading.Tasks.Extensions
+			System.ValueTuple
+			System.Formats.Asn1
+			System.IO.Pipelines
+			System.Net.Http.WinHttpHandler
 		</IncludeAssemblies>
 	</Costura>
 </Weavers>

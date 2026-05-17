@@ -106,43 +106,24 @@ jobs:
         run: |
           New-Item -ItemType Directory -Force -Path release-artifacts | Out-Null
 
-          Write-Host "Searching for build outputs..."
-          Get-ChildItem -Path "Reina.Cryptography/bin/Release" -Recurse -File
+          $net481Path = "Reina.Cryptography/bin/Release/net481/Reina.Cryptography.net481.dll"
+          $net10Path = "Reina.Cryptography/bin/Release/net10.0/Reina.Cryptography.net10.0.dll"
 
-          $net481Dll = Get-ChildItem `
-            -Path "Reina.Cryptography/bin/Release/net481" `
-            -Filter "Reina.Cryptography.dll" `
-            -File `
-            -ErrorAction Stop |
-            Select-Object -First 1
-
-          $net10Dll = Get-ChildItem `
-            -Path "Reina.Cryptography/bin/Release/net10.0" `
-            -Filter "Reina.Cryptography.dll" `
-            -File `
-            -ErrorAction Stop |
-            Select-Object -First 1
-
-          if (-not $net481Dll) {
-            Write-Error ".NET Framework 4.8.1 DLL was not found."
+          if (!(Test-Path $net481Path)) {
+            Write-Error ".NET Framework 4.8.1 DLL was not found at $net481Path"
             exit 1
           }
 
-          if (-not $net10Dll) {
-            Write-Error ".NET 10 DLL was not found."
+          if (!(Test-Path $net10Path)) {
+            Write-Error ".NET 10 DLL was not found at $net10Path"
             exit 1
           }
 
-          Copy-Item `
-            -LiteralPath $net481Dll.FullName `
-            -Destination "release-artifacts/Reina.Cryptography.net481.dll"
-
-          Copy-Item `
-            -LiteralPath $net10Dll.FullName `
-            -Destination "release-artifacts/Reina.Cryptography.net10.0.dll"
+          Copy-Item $net481Path "release-artifacts/Reina.Cryptography.net481.dll"
+          Copy-Item $net10Path "release-artifacts/Reina.Cryptography.net10.0.dll"
 
           Write-Host "Prepared release artifacts:"
-          Get-ChildItem -Path "release-artifacts" -File
+          Get-ChildItem -Path release-artifacts -File
 
       - name: Create GitHub release and upload assets
         shell: pwsh
