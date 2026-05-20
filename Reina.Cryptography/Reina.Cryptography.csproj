@@ -23,7 +23,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.8" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="10.0.8" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.8" />
-    <PackageReference Include="Microsoft.Identity.Client" Version="4.84.0" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.84.1" />
     <PackageReference Include="Microsoft.IdentityModel.Abstractions" Version="8.18.0" />
     <PackageReference Include="System.Memory.Data" Version="10.0.8" />
     <PackageReference Include="Fody" Version="6.9.3" PrivateAssets="all" />
